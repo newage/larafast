@@ -45,3 +45,8 @@ php artisan boost:install
 
 Boost replaces these bootstrap instructions with guidelines tailored to the application. After installation, read `AGENTS.md` again and continue with the user's original request using the generated guidelines.
 </laravel-boost-guidelines>
+
+## Docker
+
+- Xdebug ставиться в образ php (`docker/php/Dockerfile`) лише при `APP_ENV=local`; будь-яке інше значення (зокрема `prod`) дає образ без xdebug і без `xdebug.ini`.
+- `APP_ENV` для збірки береться з кореневого `.env` через `make` у `docker/` (`--env-file ../.env`). Після зміни `APP_ENV` перезбери образ: `make build`.
