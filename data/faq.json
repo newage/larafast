@@ -1,0 +1,306 @@
+[
+  {
+    "parent_id": "koszt_strony",
+    "type": "web",
+    "text": "Cena zależy od liczby podstron, funkcji (formularze, integracji z CRM, sklep) i tego, kto przygotowuje teksty. Po krótkiej rozmowie dostaje Pan/Pani stałą wycenę z listą tego, co jest w cenie. Jeśli w trakcie pojawi się nowa funkcja, najpierw ją wyceniamy — nic nie dolicza się bez zgody. Pracuję samodzielnie, bez kosztów biura, managerów i pośredników, dlatego cena nie jest zawyżona jak w agencjach czy software house’ach.",
+    "questions": [
+      "Ile kosztuje strona internetowa?",
+      "Ile trzeba zapłacić za prostą wizytówkę?",
+      "Od czego zależy cena strony?",
+      "Czy cena jest stała, czy może wzrosnąć?"
+    ]
+  },
+  {
+    "parent_id": "czas_realizacji",
+    "type": "web",
+    "text": "Prosta wizytówka to zwykle 1–3 dni, rozbudowana strona z dodatkowymi funkcjami — kilka tygodni. Najczęściej termin zależy od tego, jak szybko otrzymamy teksty, zdjęcia i akceptacje. Dokładny harmonogram podajemy razem z wyceną.",
+    "questions": [
+      "Ile trwa zrobienie strony?",
+      "Kiedy strona będzie gotowa?",
+      "Czy da się zrobić stronę szybciej?"
+    ]
+  },
+  {
+    "parent_id": "laravel_zamiast_wordpressa",
+    "type": "web",
+    "text": "Strony buduję na frameworku Laravel, w cenie porównywalnej z WordPressem, bo korzystam z gotowych, sprawdzonych modułów. Strona nie zależy od dziesiątek wtyczek, więc jest szybsza, bezpieczniejsza i rzadziej się „psuje” po aktualizacjach. Łatwiej też później dodać do niej automatyzację, integrację z systemami czy chatbota.",
+    "questions": [
+      "Na czym robi Pan strony?",
+      "Dlaczego nie WordPress?",
+      "Czy Laravel nie jest droższy?",
+      "Co mi da Laravel jako właścicielowi firmy?"
+    ]
+  },
+  {
+    "parent_id": "samodzielna_edycja_tresci",
+    "type": "web",
+    "text": "Tak, strona ma prosty panel do edycji tekstów, zdjęć, cennika czy aktualności. Przy oddaniu strony pokazuję, jak z niego korzystać, i zostawiam krótką instrukcję. Programista jest potrzebny dopiero przy nowych funkcjach, np. rezerwacji wizyt online, kalkulatorze ceny, galerii realizacji, opiniach klientów, wersji w drugim języku czy chatbocie.",
+    "questions": [
+      "Czy sam będę mógł zmieniać teksty i zdjęcia?",
+      "Czy będzie panel administracyjny?",
+      "Czy do każdej zmiany będę potrzebował programisty?"
+    ]
+  },
+  {
+    "parent_id": "wersja_mobilna",
+    "type": "web",
+    "text": "Każda strona jest responsywna — dopasowuje się do telefonu, tabletu i komputera. To standard, a nie dodatkowa usługa.",
+    "questions": [
+      "Czy strona będzie działać na telefonie?",
+      "Czy będzie dobrze wyglądać na tablecie?",
+      "Czy trzeba osobno płacić za wersję mobilną?"
+    ]
+  },
+  {
+    "parent_id": "widocznosc_w_google_seo",
+    "type": "web",
+    "text": "Strona jest przygotowana technicznie pod Google: szybkie ładowanie, poprawne nagłówki, opisy, mapa strony i podłączenie do Google Search Console — bezpłatnego narzędzia Google ze statystykami strony: pokazuje, po jakich frazach i jak często strona pojawia się w wyszukiwarce oraz ile osób w nią klika. Pomagam też połączyć ją z wizytówką firmy w Mapach Google. Długofalowe pozycjonowanie (treści, linki) to osobna, ciągła praca — nie zajmuję się nim, ale można je zlecić specjaliście SEO.",
+    "questions": [
+      "Czy strona będzie widoczna w Google?",
+      "Czy zajmuje się Pan pozycjonowaniem?",
+      "Jak klienci znajdą moją stronę?",
+      "Czy strona będzie dodana do Map Google?"
+    ]
+  },
+  {
+    "parent_id": "domena_i_hosting",
+    "type": "web",
+    "text": "Pomagamy wybrać i skonfigurować domenę oraz hosting, ale rejestrujemy je na Pana/Pani firmę — to Państwa własność. Opłaty za domenę (~45-70 zł/rok) i serwer (~30-50 zł/mies) płaci się bezpośrednio dostawcy. Istniejącą domenę oczywiście można przenieść lub podłączyć.",
+    "questions": [
+      "Czy załatwi Pan domenę i hosting?",
+      "Ile kosztuje utrzymanie strony miesięcznie?",
+      "Na kogo będzie zarejestrowana domena?",
+      "Mam już domenę — czy można ją wykorzystać?"
+    ]
+  },
+  {
+    "parent_id": "teksty_i_zdjecia",
+    "type": "web",
+    "text": "Najlepiej, gdy podstawowe informacje o firmie i ofercie przygotuje klient — nikt nie zna jej lepiej. Pomagamy ułożyć je w czytelne teksty (także z pomocą AI) i dobrać licencjonowane zdjęcia z banków zdjęć. Profesjonalną sesję fotograficzną warto zlecić fotografowi.",
+    "questions": [
+      "Kto przygotuje teksty na stronę?",
+      "Nie mam zdjęć — co wtedy?",
+      "Czy pomoże Pan z treściami?"
+    ]
+  },
+  {
+    "parent_id": "dodatkowe_funkcje",
+    "type": "web",
+    "text": "Tak — formularze, rezerwacje, kalkulatory, strefy klienta czy prosty sklep to typowe rozszerzenia. Można zacząć od prostej strony i dokładać funkcje etapami, bez przebudowy całości. Każdą nową funkcję wyceniamy osobno.",
+    "questions": [
+      "Czy można dodać formularz kontaktowy?",
+      "Czy zrobi Pan system rezerwacji wizyt?",
+      "Czy strona może mieć sklep internetowy?",
+      "Czy można dodawać funkcje później?"
+    ]
+  },
+  {
+    "parent_id": "strona_pod_klucz",
+    "type": "web",
+    "text": "Tak, prowadzę cały projekt pod klucz: projekt graficzny, programowanie, konfigurację domeny i hostingu, publikację oraz krótkie szkolenie z panelu. Nie musi Pan/Pani koordynować kilku wykonawców — jedna osoba odpowiada za całość.",
+    "questions": [
+      "Czy zajmie się Pan wszystkim — od projektu do uruchomienia strony?",
+      "Czy muszę osobno szukać grafika, programisty i hostingu?",
+      "Co dokładnie obejmuje usługa „pod klucz”?",
+      "Czy przeniesie Pan treści z mojej obecnej strony?"
+    ]
+  },
+  {
+    "parent_id": "bezpieczenstwo_i_kopie_zapasowe",
+    "type": "web",
+    "text": "Strona ma certyfikat SSL, zabezpieczone formularze i aktualne biblioteki. Cały kod strony trafia do repozytorium na Państwa koncie GitHub, więc zawsze mają Państwo jego pełną kopię.",
+    "questions": [
+      "Czy strona będzie bezpieczna?",
+      "Co, jeśli ktoś włamie się na stronę?",
+      "Czy będą robione kopie zapasowe?",
+      "Czy będzie certyfikat SSL (kłódka)?"
+    ]
+  },
+  {
+    "parent_id": "wlasnosc_strony",
+    "type": "web",
+    "text": "Tak. Po zapłacie przekazuję wszystkie dostępy (domena, serwer, panel), kod strony oraz pełną dokumentację techniczną kodu. Laravel jest popularnym frameworkiem, więc każdy doświadczony programista PHP może stronę dalej rozwijać. Nie ma „uwiązania” z jednym wykonawcą.",
+    "questions": [
+      "Czy strona będzie moja?",
+      "Czy dostanę kod i wszystkie dostępy?",
+      "Co, jeśli zechcę zmienić wykonawcę?"
+    ]
+  },
+  {
+    "parent_id": "czym_jest_automatyzacja_ai",
+    "type": "ai",
+    "text": "To przejęcie przez program powtarzalnych zadań, które dziś zabierają czas pracownikom. Przykłady: podsumowanie rozmów z klientami i wpisanie ich do arkusza, sortowanie maili i zapytań, przygotowanie szkiców ofert, odpowiadanie na typowe pytania na stronie. Liczy się konkretny, zmierzony efekt — mniej godzin pracy lub mniej błędów — a nie sama technologia.",
+    "questions": [
+      "Co to właściwie jest automatyzacja AI?",
+      "Co AI może zrobić w małej firmie?",
+      "Proszę podać przykłady.",
+      "Czy to nie jest tylko moda?"
+    ]
+  },
+  {
+    "parent_id": "od_czego_zaczac",
+    "type": "ai",
+    "text": "Zaczynamy od diagnozy: rozmawiamy o tym, jak wygląda dzień pracy, i liczymy, ile czasu zajmują poszczególne czynności. Wybieramy jeden proces, który jest częsty, powtarzalny i daje się zmierzyć. Nawet firma z kilkoma osobami często ma takie zadania.",
+    "questions": [
+      "Czy moja firma nadaje się do automatyzacji?",
+      "Nie wiem, co można zautomatyzować — od czego zacząć?",
+      "Czy jestem za mały na AI?"
+    ]
+  },
+  {
+    "parent_id": "ai_a_pracownicy",
+    "type": "ai",
+    "text": "Celem jest odciążenie ludzi od rutyny, a nie ich zastąpienie — decyzje i kontakt z klientem zostają po stronie zespołu. Rozwiązanie dopasowuję do narzędzi, których Państwo już używają, np. Excela czy poczty. Pracownicy nie muszą uczyć się skomplikowanych systemów.",
+    "questions": [
+      "Czy AI zastąpi moich pracowników?",
+      "Czy pracownicy będą musieli się uczyć nowych programów?",
+      "Czy to będzie trudne w obsłudze?"
+    ]
+  },
+  {
+    "parent_id": "chatbot_na_stronie",
+    "type": "ai",
+    "text": "Tak. Chatbot odpowiada na podstawie Państwa materiałów: oferty, cennika, regulaminu, najczęstszych pytań. Jeśli nie zna odpowiedzi, nie zmyśla, tylko proponuje kontakt z człowiekiem lub zbiera dane do oddzwonienia. Może działać całą dobę i przekazywać zapytania do maila lub arkusza.",
+    "questions": [
+      "Czy może Pan zrobić chatbota na moją stronę?",
+      "Czy chatbot będzie odpowiadał na pytania klientów 24/7?",
+      "Skąd chatbot będzie wiedział, co odpowiadać?",
+      "Co, jeśli chatbot nie zna odpowiedzi?"
+    ]
+  },
+  {
+    "parent_id": "bezpieczenstwo_danych_i_rodo",
+    "type": "ai",
+    "text": "Na etapie diagnozy nie potrzebujemy danych osobowych — przygotowujemy prosty arkusz Excel, w którym Państwo wpisują tylko zanonimizowane informacje (np. czas trwania i kategorię sprawy). Rozwiązania projektujemy tak, by dane osobowe w miarę możliwości nie opuszczały Państwa systemów. Korzystamy z płatnych API dostawców AI, które zgodnie z ich warunkami domyślnie nie używają przesłanych danych do trenowania modeli.",
+    "questions": [
+      "Czy moje dane będą bezpieczne?",
+      "Co z RODO?",
+      "Czy dane klientów trafią do ChatGPT lub innej firmy?",
+      "Czy muszę przekazywać dane osobowe?"
+    ]
+  },
+  {
+    "parent_id": "integracja_z_narzedziami",
+    "type": "ai",
+    "text": "Najczęściej podłączamy się do tego, co już działa: arkuszy, skrzynki mailowej, kalendarza, systemu CRM lub strony. Jeśli dany program ma API, integracja jest zwykle prosta. Zmiana narzędzi nie jest warunkiem współpracy.",
+    "questions": [
+      "Czy to będzie działać z Excelem, pocztą, naszym CRM?",
+      "Czy trzeba zmieniać programy, których używamy?",
+      "Czy można połączyć to z naszą stroną?"
+    ]
+  },
+  {
+    "parent_id": "koszt_automatyzacji",
+    "type": "ai",
+    "text": "Koszt składa się z jednorazowego wdrożenia oraz bieżących opłat za użycie modelu AI i serwer. W małej firmie opłaty za AI są zwykle niewielkie, bo płaci się za faktyczne użycie — szacujemy je przed startem. Dokładną wycenę podajemy po diagnozie, gdy wiadomo, co automatyzujemy.",
+    "questions": [
+      "Ile kosztuje wdrożenie AI?",
+      "Czy będą jakieś miesięczne opłaty?",
+      "Ile kosztuje samo korzystanie z AI?"
+    ]
+  },
+  {
+    "parent_id": "mierzenie_efektu",
+    "type": "ai",
+    "text": "Przed wdrożeniem mierzymy stan wyjściowy, np. ile minut zajmuje obsługa jednej sprawy. Po pilotażu mierzymy to samo jeszcze raz i porównujemy wyniki na liczbach. Dzięki temu decyzja o dalszym rozwoju opiera się na faktach, a nie na obietnicach.",
+    "questions": [
+      "Jak sprawdzę, czy to się opłaciło?",
+      "Jaki będzie zwrot z inwestycji?",
+      "Ile czasu zaoszczędzimy?",
+      "Czy możecie zagwarantować efekt?"
+    ]
+  },
+  {
+    "parent_id": "bledy_ai",
+    "type": "ai",
+    "text": "AI może się mylić, dlatego tam, gdzie to ważne, człowiek zatwierdza wynik przed wysłaniem. Ustawiamy jasne granice: co AI robi samo, a co tylko przygotowuje do akceptacji. W pilotażu śledzimy błędy i poprawiamy rozwiązanie, zanim obejmie więcej procesów.",
+    "questions": [
+      "Co, jeśli AI się pomyli?",
+      "Czy AI może wysłać klientowi coś złego?",
+      "Kto odpowiada za błędy?"
+    ]
+  },
+  {
+    "parent_id": "no_code_czy_wlasny_kod",
+    "type": "ai",
+    "text": "Dobieram technologię do procesu i budżetu: No-code (n8n) — dla prostych, typowych procesów, np. przesyłania danych między pocztą, arkuszem i CRM. Szybciej i taniej na start. Własny kod (Python, RAG, LangGraph) — dla złożonych procesów: praca na dokumentach firmy, wieloetapowa logika, decyzje AI z kontrolą człowieka, pełna kontrola nad danymi. Bez limitów i abonamentów za każdego użytkownika, łatwy do dalszej rozbudowy. O wyborze decydujemy wspólnie po diagnozie. Sam ChatGPT pomaga pojedynczej osobie, a automatyzacja działa w tle dla całej firmy.",
+    "questions": [
+      "W jakiej technologii powstanie automatyzacja?",
+      "Czy wystarczy gotowe narzędzie, np. n8n albo Zapier?",
+      "Czy nie wystarczy ChatGPT?",
+      "Kiedy potrzebne jest rozwiązanie pisane od zera?"
+    ]
+  },
+  {
+    "parent_id": "przebieg_wspolpracy",
+    "type": "general",
+    "text": "Pracujemy w czterech krokach: 1) Diagnoza — analizuję proces i ustalam stan początkowy. 2) Pilotaż — szybko wdrażam rozwiązanie dla konkretnego procesu. 3) Wynik — oceniam wyniki i porównuję je ze wskaźnikami początkowymi. 4) Wsparcie — w razie potrzeby kontynuuję rozwój i wspieram rozwiązanie. Przy stronach internetowych krokami są: rozmowa, wycena, projekt, akceptacja, publikacja.",
+    "questions": [
+      "Jak wygląda współpraca krok po kroku?",
+      "Co się dzieje po pierwszej rozmowie?",
+      "Ile spotkań będzie potrzebnych?"
+    ]
+  },
+  {
+    "parent_id": "umowa_i_faktura",
+    "type": "general",
+    "text": "Tak, każda współpraca opiera się na pisemnej umowie z zakresem prac i terminami. Umowę zawiera i fakturę wystawia inkubator przedsiębiorczości, z którym współpracujemy. Dla Państwa to zwykła faktura kosztowa.",
+    "questions": [
+      "Czy podpiszemy umowę?",
+      "Czy wystawia Pan fakturę VAT?",
+      "Kto jest stroną umowy?"
+    ]
+  },
+  {
+    "parent_id": "platnosci",
+    "type": "general",
+    "text": "Przy stronach płatność jest zwykle podzielona na zaliczkę i resztę po oddaniu strony. Przy automatyzacji stosujemy model mieszany: płatna diagnoza, pilotaż, ograniczona premia za osiągnięty wynik, a potem opcjonalny abonament. Dzięki temu ryzyko rozłożone jest uczciwie po obu stronach.",
+    "questions": [
+      "Jak wyglądają płatności?",
+      "Czy trzeba wpłacić zaliczkę?",
+      "Czy można płacić w ratach?",
+      "Czy płacę za efekt?"
+    ]
+  },
+  {
+    "parent_id": "referencje_i_doswiadczenie",
+    "type": "general",
+    "text": "Mam ponad 20 lat doświadczenia w tworzeniu stron i aplikacji internetowych, w tym 13 lat jako starszy programista i architekt backendu w dużej firmie edukacyjnej online. Na mojej stronie pokazuję przykłady dużych projektów, przy których pracowałem. Żywym przykładem mojej pracy jest sama strona: zbudowana w Laravelu, z działającym chatbotem AI, którego można od razu przetestować. Usługi dla małych firm dopiero rozwijam, dlatego zaczynam od krótkiego pilotażu z mierzalnym wynikiem.",
+    "questions": [
+      "Czy ma Pan portfolio albo referencje?",
+      "Dla kogo już Pan to robił?",
+      "Skąd mam wiedzieć, że Pan sobie poradzi?"
+    ]
+  },
+  {
+    "parent_id": "kto_realizuje_projekt",
+    "type": "general",
+    "text": "Projekt prowadzi jedna osoba — od analizy, przez programowanie, po wdrożenie — więc nie ma „głuchego telefonu”. Cały kod, dokumentacja i dostępy są przekazywane klientowi. W razie potrzeby inny programista może przejąć projekt.",
+    "questions": [
+      "Czy pracuje Pan sam, czy ma zespół?",
+      "Kto będzie moją osobą kontaktową?",
+      "Co, jeśli Pan zachoruje albo zniknie?"
+    ]
+  },
+  {
+    "parent_id": "wsparcie_po_wdrozeniu",
+    "type": "general",
+    "text": "Po oddaniu jest okres na zgłaszanie i bezpłatne poprawianie błędów (długość określa umowa). Strona działa samodzielnie, a drobne zmiany można zlecać jednorazowo. Przy automatyzacjach i większych systemach oferujemy stałe wsparcie w formie abonamentu.",
+    "questions": [
+      "Co po oddaniu strony lub wdrożeniu?",
+      "Czy oferuje Pan opiekę techniczną?",
+      "Co, jeśli coś przestanie działać?",
+      "Ile kosztuje wsparcie?"
+    ]
+  },
+  {
+    "parent_id": "komunikacja",
+    "type": "general",
+    "text": "Komunikujemy się po polsku (możliwy też angielski lub ukraiński). Spotkania odbywają się głównie online. Na wiadomości odpowiadam zwykle w ciągu jednego dnia roboczego.",
+    "questions": [
+      "W jakim języku będziemy się komunikować?",
+      "Czy spotkania będą online, czy na miejscu?",
+      "Jak szybko Pan odpowiada?"
+    ]
+  }
+]

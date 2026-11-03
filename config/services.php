@@ -28,6 +28,16 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'pinecone' => [
+        'api_key' => env('PINECONE_API_KEY'),
+        'index_name' => env('PINECONE_INDEX_NAME'),
+        // Optional: skips the control-plane lookup of the index host.
+        'host' => env('PINECONE_INDEX_HOST'),
+        // The field the index embeds (its field_map).
+        'text_field' => env('PINECONE_TEXT_FIELD', 'text'),
+        'namespace' => env('PINECONE_NAMESPACE'),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

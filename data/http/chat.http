@@ -1,0 +1,16 @@
+###
+POST http://127.0.0.1:8000/chat
+Content-Type: application/json
+
+{
+    "messages":[
+        {
+            "question":"Ile kosztuje wdrożenie AI?",
+            "answer":"Koszt składa się z jednorazowego wdrożenia oraz bieżących opłat za użycie modelu AI i serwer."
+        },
+        {
+            "question":"Czy można połączyć to z naszą stroną?"
+        }
+    ]
+}
+###

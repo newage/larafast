@@ -7,10 +7,10 @@ ARG APP_ENV=local
 COPY xdebug.ini /usr/local/etc/php/xdebug.ini
 
 # Ctype, cURL, DOM, Fileinfo, Filter, Hash, Mbstring, OpenSSL, PCRE, PDO, Session,
-# Tokenizer, XML are already compiled into the official image; only pdo_mysql is added.
+# Tokenizer, XML are already compiled into the official image; pdo_mysql, intl (Filament) and zip are added.
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends git unzip \
-    && docker-php-ext-install pdo_mysql \
+    && apt-get install -y --no-install-recommends git unzip libicu-dev libzip-dev \
+    && docker-php-ext-install pdo_mysql intl zip \
     && if [ "$APP_ENV" = "local" ]; then \
         pecl install xdebug \
         && docker-php-ext-enable xdebug \
