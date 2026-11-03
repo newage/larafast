@@ -11,6 +11,18 @@
         </g>
         <circle class="pulse" cx="720" cy="460" r="120" stroke="#313131" stroke-width="1" style="transform-origin:720px 460px" />
         <circle class="pulse2" cx="720" cy="460" r="120" stroke="#313131" stroke-width="1" style="transform-origin:720px 460px" />
+        <g class="dots" fill="#9B9B9B">
+            <circle cx="200" cy="700" r="2" style="animation-delay:0s" />
+            <circle cx="340" cy="820" r="2" style="animation-delay:1.5s" />
+            <circle cx="520" cy="640" r="2" style="animation-delay:3s" />
+            <circle cx="1180" cy="760" r="2" style="animation-delay:4.5s" />
+            <circle cx="1020" cy="900" r="2" style="animation-delay:6s" />
+            <circle cx="900" cy="560" r="2" style="animation-delay:7.5s" />
+            <circle cx="260" cy="430" r="2" style="animation-delay:2s" />
+            <circle cx="1250" cy="420" r="2" style="animation-delay:5s" />
+            <circle cx="640" cy="950" r="2" style="animation-delay:3.5s" />
+            <circle cx="1380" cy="620" r="2" style="animation-delay:1s" />
+        </g>
         <g class="spin1" style="transform-origin:720px 460px">
             <circle cx="720" cy="460" r="320" stroke="#313131" stroke-width="1" stroke-dasharray="4 12" />
             <polygon points="1040,460 560,737 560,183" stroke="#272727" stroke-width="1" />

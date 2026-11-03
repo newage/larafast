@@ -40,9 +40,13 @@
 
     <div class="reveal mt-16 flex flex-col gap-4">
         <div class="text-sm text-muted">Technologie, na których pracuję</div>
-        <div class="flex flex-wrap gap-2 font-mono text-sm">
-            @foreach ($technologies as $technology)
-                <span class="rounded-lg border border-line-strong px-3 py-2">{{ $technology }}</span>
+        <div class="mq font-mono text-sm">
+            @foreach ([false, true] as $copy)
+                <div class="mqi" @if ($copy) aria-hidden="true" @endif>
+                    @foreach ($technologies as $technology)
+                        <span class="rounded-lg border border-line-strong px-3 py-2">{{ $technology }}</span>
+                    @endforeach
+                </div>
             @endforeach
         </div>
     </div>

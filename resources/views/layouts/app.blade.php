@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Strony www i automatyzacja AI</title>
-        <meta name="description" content="Strony firmowe w Laravel i automatyzacje z AI dla małych firm. Stały zakres, jasna cena, kod, który należy do Ciebie.">
+        <title>@yield('title', 'Strony www i automatyzacja AI')</title>
+        <meta name="description" content="@yield('description', 'Strony firmowe w Laravel i automatyzacje z AI dla małych firm. Stały zakres, jasna cena, kod, który należy do Ciebie.')">
 
         @fonts
 

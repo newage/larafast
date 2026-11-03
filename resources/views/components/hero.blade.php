@@ -1,9 +1,9 @@
 @php
     $steps = [
-        ['Z formularza kontaktowego wpada nowe zapytanie', 'Gotowe'],
-        ['Claude czyta treść i oznacza temat oraz pilność', 'Gotowe'],
-        ['Kontakt trafia do arkusza z klientami', 'Gotowe'],
-        ['Szkic odpowiedzi czeka na Twoją akceptację', 'Czeka na Ciebie'],
+        ['Ustalam z klientem, czego potrzebuje', 'Rozmowa'],
+        ['Przygotowuję projekt graficzny i logo, klient je zatwierdza', 'Akceptacja'],
+        ['Tworzę stronę na podstawie zatwierdzonego projektu', 'Kod'],
+        ['Publikuję stronę na hostingu', 'Online'],
     ];
 @endphp
 
@@ -15,15 +15,16 @@
     <p class="in mt-6 max-w-[680px] text-lg text-muted" style="animation-delay:160ms">Tworzę szybkie strony firmowe w Laravel oraz procesy z AI, które zdejmują z zespołu powtarzalną pracę. Jeden programista, jeden kontakt, ustalony zakres przed startem.</p>
 
     <div class="in mt-8 flex flex-col items-center gap-4" style="animation-delay:240ms">
-        <x-cta-button>Umów bezpłatną rozmowę</x-cta-button>
-        <p class="text-sm text-muted">13 lat doświadczenia w backendzie stoi za każdym projektem</p>
+        <x-cta-button>Czat z asystentem</x-cta-button>
+        <p class="text-sm text-muted">20 lat doświadczenia w backendzie stoi za każdym projektem</p>
     </div>
 
     <div class="in mt-16 w-full max-w-[720px] rounded-3xl border border-line bg-surface p-3 text-left" style="animation-delay:320ms">
-        <div class="flex flex-col gap-4 rounded-xl bg-surface-raised p-6">
+        <div class="wf flex flex-col gap-4 rounded-xl bg-surface-raised p-6">
+            <div class="wfbar" aria-hidden="true"></div>
             <div class="flex items-center justify-between font-mono text-sm text-muted">
-                <span>Przykładowy proces</span>
-                <span>Zapytanie klienta</span>
+                <span class="inline-flex items-center gap-2"><span class="live" aria-hidden="true"></span>Przykładowy proces</span>
+                <span>Jak pracuję</span>
             </div>
             @foreach ($steps as $i => [$label, $status])
                 <div class="flex flex-wrap items-center gap-3 py-3">

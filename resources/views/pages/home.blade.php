@@ -6,6 +6,8 @@
 
         <a href="#main" class="absolute -top-20 left-4 z-10 rounded-lg bg-ink px-3 py-2 text-sm font-semibold text-canvas focus:top-4">Przejdź do treści</a>
 
+        <div class="prog" aria-hidden="true"></div>
+
         <x-nav />
 
         <main id="main" class="relative z-[1]">

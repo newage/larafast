@@ -38,7 +38,7 @@ class LandingPageTest extends TestCase
             'Platformy, przy których pracowałem.',
             'Trzy kroki od pomysłu do przekazania.',
             'Zapytaj mojego asystenta.',
-            'Napisz, co spowalnia Twoją firmę.',
+            'Opisz, co spowalnia Twoją firmę.',
             'Polityka prywatności',
         ]);
     }
@@ -61,19 +61,44 @@ class LandingPageTest extends TestCase
         }
     }
 
-    public function test_calls_to_action_lead_to_contact_and_mailto(): void
+    public function test_calls_to_action_lead_to_chat_without_mailto(): void
     {
-        config(['site.contact_email' => 'hello@example.test']);
-
         $content = $this->get('/')->assertOk()->getContent();
 
-        preg_match_all('/<a\b[^>]*>\s*Umów (?:bezpłatną )?rozmowę/u', $content, $ctas);
-        $this->assertCount(4, $ctas[0]);
+        preg_match_all('/<a\b[^>]*>\s*Czat z (?:AI|asystentem)\s*<\/a>/u', $content, $ctas);
+        $this->assertCount(3, $ctas[0]);
 
-        $anchors = array_filter($ctas[0], fn (string $link) => str_contains($link, 'href="#contact"'));
-        $this->assertCount(3, $anchors);
+        foreach ($ctas[0] as $link) {
+            $this->assertStringContainsString('href="#chat"', $link);
+            $this->assertStringNotContainsString('mailto:', $link);
+        }
 
-        $this->assertSame(1, substr_count($content, 'href="mailto:hello@example.test"'));
+        $this->assertStringNotContainsString('Umów', $content);
+        $this->assertStringContainsString('href="mailto:hello@vadymleontiev.dev"', $content);
+    }
+
+    public function test_page_links_to_privacy_policy_and_warns_about_ai(): void
+    {
+        $content = $this->get('/')->assertOk()->getContent();
+
+        $this->assertGreaterThanOrEqual(2, substr_count($content, 'href="/polityka-prywatnosci"'));
+        $this->assertStringContainsString('Rozmawiasz z asystentem AI. Nie podawaj danych wrażliwych.', $content);
+        $this->assertStringContainsString('Opisz, co spowalnia Twoją firmę.', $content);
+    }
+
+    public function test_hero_shows_the_website_process(): void
+    {
+        $this->get('/')->assertOk()
+            ->assertSeeInOrder([
+                'Przykładowy proces', 'Jak pracuję',
+                'Ustalam z klientem, czego potrzebuje', 'Rozmowa',
+                'Przygotowuję projekt graficzny i logo, klient je zatwierdza', 'Akceptacja',
+                'Tworzę stronę na podstawie zatwierdzonego projektu', 'Kod',
+                'Publikuję stronę na hostingu', 'Online',
+            ])
+            ->assertDontSee('Zapytanie klienta')
+            ->assertDontSee('Czeka na Ciebie')
+            ->assertDontSee('Gotowe');
     }
 
     public function test_page_has_no_internal_links_except_anchors(): void
@@ -84,7 +109,7 @@ class LandingPageTest extends TestCase
 
         foreach ($matches[1] as $href) {
             $this->assertMatchesRegularExpression(
-                '/^(#.*|mailto:.*|https?:\/\/.*)$/',
+                '/^(#.*|mailto:.*|https?:\/\/.*|\/polityka-prywatnosci)$/',
                 $href,
                 "Unexpected internal link: {$href}"
             );
@@ -106,7 +131,7 @@ class LandingPageTest extends TestCase
             ->assertSee('Co można zautomatyzować?')
             ->assertSee('Czy to bezpieczne dla danych klientów?')
             ->assertSee('Polityka prywatności')
-            ->assertSee('Regulamin');
+            ->assertDontSee('Regulamin');
     }
 
     public function test_chat_widget_works_on_the_client_only(): void

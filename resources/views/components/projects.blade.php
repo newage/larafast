@@ -7,7 +7,7 @@
             'url' => 'https://www.englishdom.com/',
             'text' => 'Internetowa szkoła angielskiego działająca od 2010 roku: lekcje wideo jeden na jeden, zajęcia grupowe, kluby konwersacyjne i aplikacje mobilne.',
             'tags' => 'PHP, backend, architektura',
-            'svg' => '<rect x="20" y="8" width="140" height="84" rx="6"/><circle cx="90" cy="38" r="12" stroke="#FFFFFF"/><path d="M66 74c4-14 44-14 48 0"/><rect x="172" y="8" width="48" height="38" rx="4"/><rect x="172" y="54" width="48" height="38" rx="4"/>',
+            'svg' => '<rect x="20" y="8" width="140" height="84" rx="6"/><circle class="spark" cx="90" cy="38" r="12" stroke="#FFFFFF"/><path d="M66 74c4-14 44-14 48 0"/><rect x="172" y="8" width="48" height="38" rx="4"/><rect x="172" y="54" width="48" height="38" rx="4"/>',
         ],
         [
             'name' => 'All Right Pro',
@@ -15,7 +15,7 @@
             'url' => 'https://allrightpro.com/pl/',
             'text' => 'Internetowa szkoła angielskiego dla polskich uczniów: lekcje indywidualne z lektorami, kursy online i kluby konwersacyjne.',
             'tags' => 'Platforma online, backend',
-            'svg' => '<rect x="20" y="10" width="200" height="12" rx="6"/><rect x="20" y="10" width="120" height="12" rx="6" stroke="#FFFFFF"/><rect x="20" y="38" width="60" height="52" rx="4"/><rect x="90" y="38" width="60" height="52" rx="4" stroke="#FFFFFF"/><rect x="160" y="38" width="60" height="52" rx="4"/><path d="M30 52h30M30 62h20M100 52h30M100 62h20M170 52h30M170 62h20"/>',
+            'svg' => '<rect x="20" y="10" width="200" height="12" rx="6"/><rect class="grow" x="20" y="10" width="120" height="12" rx="6" stroke="#FFFFFF" vector-effect="non-scaling-stroke"/><rect x="20" y="38" width="60" height="52" rx="4"/><rect x="90" y="38" width="60" height="52" rx="4" stroke="#FFFFFF"/><rect x="160" y="38" width="60" height="52" rx="4"/><path d="M30 52h30M30 62h20M100 52h30M100 62h20M170 52h30M170 62h20"/>',
         ],
     ];
 @endphp

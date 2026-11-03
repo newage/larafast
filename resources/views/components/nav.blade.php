@@ -7,6 +7,6 @@
             <a class="text-muted hover:text-ink" href="#process">Proces</a>
             <a class="text-muted hover:text-ink" href="#chat">Czat AI</a>
         </div>
-        <x-cta-button class="text-sm">Umów rozmowę</x-cta-button>
+        <x-cta-button class="text-sm">Czat z AI</x-cta-button>
     </nav>
 </div>
