@@ -48,6 +48,7 @@ class ChatRequestValidatorTest extends TestCase
         yield 'long question' => [[['question' => str_repeat('a', 201)]]];
         yield 'long answer' => [[['question' => 'q', 'answer' => str_repeat('a', 201)], ['question' => 'q']]];
         yield 'blank question' => [[['question' => '  ']]];
+        yield 'last with null answer' => [[['question' => 'q', 'answer' => null]]];
         yield 'last with answer' => [[['question' => 'q', 'answer' => 'a']]];
         yield 'earlier without answer' => [[['question' => 'q'], ['question' => 'q']]];
         yield 'question not a string' => [[['question' => ['x']]]];

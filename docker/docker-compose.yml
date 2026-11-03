@@ -17,6 +17,19 @@ services:
     depends_on:
       - mysql
 
+  cron:
+    build:
+      context: ./php
+      args:
+        HOST_UID: ${HOST_UID}
+        HOST_GID: ${HOST_GID}
+        APP_ENV: ${APP_ENV:-local}
+    command: supercronic /var/www/larafast/docker/crond/${APP_ENV:-local}
+    volumes:
+      - ..:/var/www/larafast
+    depends_on:
+      - mysql
+
   nginx:
     image: nginx:stable-alpine
     ports:

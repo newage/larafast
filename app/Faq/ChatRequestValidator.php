@@ -28,7 +28,7 @@ final class ChatRequestValidator
         foreach ($messages as $i => $message) {
             $question = $this->text($message, 'question', $i);
             if ($i === $last) {
-                if (isset($message['answer'])) {
+                if (is_array($message) && array_key_exists('answer', $message)) {
                     throw new InvalidChatRequest('the last message must not have an answer');
                 }
                 $result[] = new ChatMessage($question);

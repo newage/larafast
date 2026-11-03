@@ -5,8 +5,12 @@ namespace App\Console\Commands;
 use App\Faq\FaqRecords;
 use App\Faq\PineconeIndex;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\File;
 use InvalidArgumentException;
+use JsonException;
 
 /**
  * Seeds Pinecone (integrated embedding) from data/faq.json. Only new or changed (content_hash)
@@ -28,7 +32,7 @@ class FaqSeed extends Command
 
         try {
             $records = FaqRecords::toRecords(json_decode(File::get($file), true, flags: JSON_THROW_ON_ERROR), $textField);
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException|JsonException|FileNotFoundException $e) {
             $this->error($e->getMessage());
 
             return self::FAILURE;
@@ -48,6 +52,20 @@ class FaqSeed extends Command
             }
         }
 
+        try {
+            return $this->sync($records, $dryRun);
+        } catch (ConnectionException|RequestException $e) {
+            $this->error('Pinecone request failed: '.$e->getMessage());
+
+            return self::FAILURE;
+        }
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $records
+     */
+    private function sync(array $records, bool $dryRun): int
+    {
         $index = PineconeIndex::fromConfig();
         $existing = [];
         foreach (array_chunk(array_column($records, '_id'), FaqRecords::FETCH_BATCH_SIZE) as $ids) {

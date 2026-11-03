@@ -1,0 +1,2 @@
+# Продакшн: планувальник Laravel кожні 5 хвилин.
+*/5 * * * * php artisan schedule:run

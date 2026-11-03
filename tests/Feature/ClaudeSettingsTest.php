@@ -25,7 +25,7 @@ class ClaudeSettingsTest extends TestCase
         Setting::create(['key' => 'CLAUDE_MAX_TOKENS', 'value' => null]);
 
         $this->assertSame(1024, Setting::resolve('CLAUDE_MAX_TOKENS'));
-        $this->assertSame(4, Setting::resolve('MAX_MESSAGES'));
+        $this->assertEquals(4, Setting::resolve('MAX_MESSAGES'));
     }
 
     public function test_api_key_is_encrypted_at_rest(): void

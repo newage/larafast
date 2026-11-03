@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Faq;
 
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class FaqCommandsTest extends TestCase
@@ -21,6 +22,25 @@ class FaqCommandsTest extends TestCase
 
         $this->artisan('faq:seed')
             ->expectsOutputToContain('PINECONE_API_KEY is not set')
+            ->assertFailed();
+    }
+
+    public function test_seed_reports_a_missing_file_without_a_stack_trace(): void
+    {
+        $this->artisan('faq:seed', ['file' => '/nonexistent/faq.json'])->assertFailed();
+    }
+
+    public function test_seed_reports_a_pinecone_failure(): void
+    {
+        config([
+            'services.pinecone.api_key' => 'key',
+            'services.pinecone.index_name' => 'idx',
+            'services.pinecone.host' => 'https://idx.example.test',
+        ]);
+        Http::fake(['*' => Http::response(['error' => 'boom'], 500)]);
+
+        $this->artisan('faq:seed')
+            ->expectsOutputToContain('Pinecone request failed')
             ->assertFailed();
     }
 }

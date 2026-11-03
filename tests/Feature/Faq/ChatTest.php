@@ -173,6 +173,6 @@ class ChatTest extends TestCase
             $this->postJson('/chat', ['messages' => []])->assertStatus(422);
         }
 
-        $this->postJson('/chat', ['messages' => []])->assertStatus(429);
+        $this->postJson('/chat', ['messages' => []])->assertStatus(429)->assertJsonPath('type', 'error');
     }
 }
