@@ -32,7 +32,7 @@ class LandingPageTest extends TestCase
         }
 
         $response->assertSeeInOrder([
-            'Przykładowy proces',
+            'Jak pracuję',
             'Dobre',
             'Dwie rzeczy, zrobione porządnie.',
             'Platformy, przy których pracowałem.',
@@ -90,7 +90,7 @@ class LandingPageTest extends TestCase
     {
         $this->get('/')->assertOk()
             ->assertSeeInOrder([
-                'Przykładowy proces', 'Jak pracuję',
+                'Jak pracuję',
                 'Ustalam z klientem, czego potrzebuje', 'Rozmowa',
                 'Przygotowuję projekt graficzny i logo, klient je zatwierdza', 'Akceptacja',
                 'Tworzę stronę na podstawie zatwierdzonego projektu', 'Kod',
@@ -126,7 +126,7 @@ class LandingPageTest extends TestCase
     public function test_page_has_technologies_chat_chips_and_footer(): void
     {
         $this->get('/')->assertOk()
-            ->assertSeeInOrder(['Laravel', 'PHP', 'Python', 'FastAPI', 'LangChain', 'Claude API', 'MCP', 'Docker'])
+            ->assertSeeInOrder(['Laravel', 'Symfony', 'PHP', 'MySQL', 'Python', 'PostgreSQL', 'Redis', 'RabbitMQ', 'Kafka', 'FastAPI', 'LangChain', 'Claude API', 'MCP', 'REST API'])
             ->assertSee('Ile kosztuje strona?')
             ->assertSee('Co można zautomatyzować?')
             ->assertSee('Czy to bezpieczne dla danych klientów?')

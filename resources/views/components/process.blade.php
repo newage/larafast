@@ -16,7 +16,7 @@
             'svg' => '<path d="M9 8l-5 4 5 4M15 8l5 4-5 4"/>',
         ],
     ];
-    $technologies = ['Laravel', 'PHP', 'Python', 'FastAPI', 'LangChain', 'Claude API', 'MCP', 'Docker'];
+    $technologies = ['Laravel', 'Symfony', 'PHP', 'MySQL', 'Python', 'PostgreSQL', 'Redis', 'RabbitMQ', 'Kafka', 'FastAPI', 'LangChain', 'Claude API', 'MCP', 'REST API'];
 @endphp
 
 <section id="process" class="mx-auto max-w-[1120px] scroll-mt-20 px-6 py-16 sm:py-24">

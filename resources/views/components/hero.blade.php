@@ -23,8 +23,7 @@
         <div class="wf flex flex-col gap-4 rounded-xl bg-surface-raised p-6">
             <div class="wfbar" aria-hidden="true"></div>
             <div class="flex items-center justify-between font-mono text-sm text-muted">
-                <span class="inline-flex items-center gap-2"><span class="live" aria-hidden="true"></span>Przykładowy proces</span>
-                <span>Jak pracuję</span>
+                <span class="inline-flex items-center gap-2"><span class="live" aria-hidden="true"></span>Jak pracuję</span>
             </div>
             @foreach ($steps as $i => [$label, $status])
                 <div class="flex flex-wrap items-center gap-3 py-3">
