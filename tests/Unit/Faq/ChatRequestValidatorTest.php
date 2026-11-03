@@ -39,6 +39,16 @@ class ChatRequestValidatorTest extends TestCase
         $this->assertCount(4, $this->validator()->validate([...$history, ['question' => 'x']]));
     }
 
+    public function test_answer_longer_than_max_chars_is_accepted(): void
+    {
+        $messages = $this->validator()->validate([
+            ['question' => 'q', 'answer' => str_repeat('a', 500)],
+            ['question' => 'q'],
+        ]);
+
+        $this->assertSame(500, mb_strlen($messages[0]->answer));
+    }
+
     /** @return iterable<string, array{mixed}> */
     public static function invalidBodies(): iterable
     {
@@ -46,7 +56,6 @@ class ChatRequestValidatorTest extends TestCase
         yield 'empty' => [[]];
         yield 'too many' => [array_fill(0, 5, ['question' => 'q', 'answer' => 'a'])];
         yield 'long question' => [[['question' => str_repeat('a', 201)]]];
-        yield 'long answer' => [[['question' => 'q', 'answer' => str_repeat('a', 201)], ['question' => 'q']]];
         yield 'blank question' => [[['question' => '  ']]];
         yield 'last with null answer' => [[['question' => 'q', 'answer' => null]]];
         yield 'last with answer' => [[['question' => 'q', 'answer' => 'a']]];

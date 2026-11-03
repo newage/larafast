@@ -1,20 +1,8 @@
-const replies = [
-    [['cen', 'kosz', 'ile ', 'wycen', 'płat'], 'Każdy projekt ma stałą cenę, którą ustalamy na piśmie po bezpłatnej rozmowie. Cena zależy głównie od zakresu: liczby podstron, integracji i tego, ile procesów ma działać automatycznie.'],
-    [['dane', 'bezpiecz', 'rodo', 'prywat', 'poufn'], 'Projektuję procesy tak, aby do modelu AI trafiały tylko dane potrzebne do danego zadania. Przed startem dostajesz listę usług, z których korzystamy, a wrażliwe kroki mogą wymagać Twojej akceptacji.'],
-    [['automat', 'faktur', 'arkusz', 'proces', 'zautomat'], 'Automatyzować warto wszystko, co powtarza się według stałych reguł: sortowanie zapytań, uzupełnianie arkuszy, przypomnienia dla klientów, przygotowanie faktur czy szkice odpowiedzi. Opisz jedno zadanie, które zajmuje Ci najwięcej czasu.'],
-    [['wordpress', 'laravel', 'stron', 'www', 'sklep'], 'Strony buduję w Laravel: bez wtyczek wymagających ciągłego łatania, szybkie i z możliwością własnej logiki, na przykład rezerwacji czy kalkulatorów. Kod i konta zostają Twoje.'],
-    [['asystent', 'chat', 'bot', 'ai'], 'Asystent AI odpowiada klientom na typowe pytania na podstawie Twoich własnych dokumentów, a trudniejsze sprawy przekazuje Tobie razem z podsumowaniem rozmowy.'],
-    [['termin', 'kiedy', 'jak długo', 'czas'], 'Czas zależy od zakresu. Dokładny harmonogram dostajesz w pisemnej ofercie, jeszcze przed rozpoczęciem pracy.'],
-    [['umów', 'umow', 'kontakt', 'rozmow', 'mail'], 'Najprościej umówić bezpłatną rozmowę trwającą 30 minut. Użyj przycisku na tej stronie, a omówimy Twoje zadanie.'],
-];
-
-const fallback = 'Dziękuję za wiadomość. Żeby dobrze doradzić, potrzebuję trochę więcej szczegółów: czym zajmuje się Twoja firma i jakie zadanie chcesz uprościć? Możesz też od razu umówić bezpłatną rozmowę.';
-
-const answer = (raw) => {
-    const text = raw.toLowerCase();
-    const match = replies.find(([words]) => words.some((word) => text.includes(word)));
-
-    return match ? match[1] : fallback;
+const errorMessages = {
+    429: 'Zbyt wiele wiadomości w krótkim czasie. Odczekaj chwilę i spróbuj ponownie.',
+    502: 'Asystent jest chwilowo niedostępny. Spróbuj ponownie za chwilę.',
+    422: 'Nie udało się przetworzyć wiadomości. Skróć ją lub odśwież stronę i spróbuj ponownie.',
+    default: 'Coś poszło nie tak. Sprawdź połączenie i spróbuj ponownie.',
 };
 
 const bubble = (text, own) => {
@@ -27,16 +15,53 @@ const bubble = (text, own) => {
     return el;
 };
 
+// MAX_MESSAGES counts the current question too, so history gets at most maxMessages - 1 pairs.
+const buildMessages = (history, question, maxMessages) => {
+    const keep = Math.max(maxMessages - 1, 0);
+    const pairs = keep === 0 ? [] : history.slice(-keep);
+
+    return [...pairs, { question }];
+};
+
 const initChat = (root) => {
     const log = root.querySelector('[data-chat-log]');
     const form = root.querySelector('[data-chat-form]');
     const input = root.querySelector('[data-chat-input]');
+    const maxMessages = parseInt(root.dataset.maxMessages, 10) || 2;
+    const maxChars = parseInt(root.dataset.maxChars, 10);
+    const history = [];
     let typing = false;
+
+    if (maxChars > 0) {
+        input.maxLength = maxChars;
+    }
 
     // The log is column-reverse, so the newest message goes first in the DOM.
     const push = (el) => log.insertBefore(el, log.firstChild);
 
-    const send = (raw) => {
+    const ask = async (question) => {
+        let response;
+
+        try {
+            response = await fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify({ messages: buildMessages(history, question, maxMessages) }),
+            });
+        } catch {
+            return { error: errorMessages.default };
+        }
+
+        const data = await response.json().catch(() => null);
+
+        if (response.ok && data?.type === 'answer' && typeof data.message === 'string' && data.message.trim() !== '') {
+            return { answer: data.message };
+        }
+
+        return { error: errorMessages[response.status] ?? errorMessages.default };
+    };
+
+    const send = async (raw) => {
         const text = raw.trim();
 
         if (!text || typing) {
@@ -51,11 +76,18 @@ const initChat = (root) => {
         indicator.classList.add('text-muted');
         push(indicator);
 
-        setTimeout(() => {
+        try {
+            const { answer, error } = await ask(text);
+
+            if (answer !== undefined) {
+                history.push({ question: text, answer });
+            }
+
+            push(bubble(answer ?? error, false));
+        } finally {
             indicator.remove();
-            push(bubble(answer(text), false));
             typing = false;
-        }, 900);
+        }
     };
 
     form.addEventListener('submit', (event) => {

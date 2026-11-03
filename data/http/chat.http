@@ -13,9 +13,3 @@ Content-Type: application/json
         }
     ]
 }
-
-###{
-###    "type": "answer",
-###    "message": "Tak, zwykle można. Najczęściej łączymy się z tym, co już działa, np. ze stroną, arkuszami, skrzynką mailową, kalendarzem czy systemem CRM. Jeśli dany program ma API, integracja jest zazwyczaj prosta. Nie trzeba też zmieniać dotychczasowych narzędzi.\n\nJeśli chodzi o samą stronę, można zacząć od prostej wersji i dokładać funkcje etapami, bez przebudowy całości. Każda nowa funkcja jest wyceniana osobno."
-###}
-###

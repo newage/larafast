@@ -26,7 +26,7 @@ final class ChatRequestValidator
         $last = count($messages) - 1;
         $result = [];
         foreach ($messages as $i => $message) {
-            $question = $this->text($message, 'question', $i);
+            $question = $this->text($message, 'question', $i, limit: true);
             if ($i === $last) {
                 if (is_array($message) && array_key_exists('answer', $message)) {
                     throw new InvalidChatRequest('the last message must not have an answer');
@@ -38,20 +38,20 @@ final class ChatRequestValidator
             if (! isset($message['answer'])) {
                 throw new InvalidChatRequest("messages[$i] must have an answer");
             }
-            $result[] = new ChatMessage($question, $this->text($message, 'answer', $i));
+            $result[] = new ChatMessage($question, $this->text($message, 'answer', $i, limit: false));
         }
 
         return $result;
     }
 
-    private function text(mixed $message, string $field, int $i): string
+    private function text(mixed $message, string $field, int $i, bool $limit): string
     {
         $value = is_array($message) ? ($message[$field] ?? null) : null;
         $name = "messages[$i].$field";
         if (! is_string($value) || trim($value) === '') {
             throw new InvalidChatRequest("$name must be a non-empty string");
         }
-        if (mb_strlen($value) > $this->maxChars) {
+        if ($limit && mb_strlen($value) > $this->maxChars) {
             throw new InvalidChatRequest("$name must be at most {$this->maxChars} characters");
         }
 

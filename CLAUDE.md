@@ -25,6 +25,7 @@ Laravel 13 / PHP ^8.3 app with a Filament 5 admin panel. Its main feature is a p
   3. `FaqRetriever` queries `PineconeIndex`, keeping only hits at or above `VECTOR_MIN_SCORE`.
   4. With no hits it returns `ClaudeChat::NOT_FOUND_MESSAGE` without calling Claude again. Otherwise `ClaudeChat::answer` generates the reply.
   5. Upstream failures are wrapped in `UpstreamFailure`.
+- The landing-page widget (`resources/views/components/ai-chat.blade.php`, `resources/js/chat.js`) calls `POST /chat`, keeps the history in page memory and sends the last `MAX_MESSAGES − 1` pairs plus the new question. `MAX_MESSAGES` and `MAX_MESSAGE_CHARS` reach it as `data-max-messages` / `data-max-chars` from `Setting::resolve`. `MAX_MESSAGE_CHARS` limits only `question`, not `answer`. Errors are shown as Polish texts chosen by HTTP status.
 - `ClaudeGateway` is the interface to the Anthropic API; `AnthropicGateway` implements it. Tests fake the gateway.
 - `FaqServiceProvider` builds the whole graph. Every tunable (model, effort, max tokens, message limits, min score, API key) is read through `Setting::resolve($key)`, **at resolve time, not boot time**.
 - `Setting::resolve` returns the DB value (editable in the Filament admin) when it is non-empty, otherwise the `config('claude.*')` default from `.env`. Only `ANTHROPIC_API_KEY` is stored encrypted.

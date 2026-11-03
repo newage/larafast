@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Models\Setting;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LandingPageTest extends TestCase
 {
+    use RefreshDatabase;
+
     private const SECTIONS = ['services', 'projects', 'process', 'chat', 'contact'];
 
     public function test_home_page_is_polish_and_public(): void
@@ -112,5 +116,16 @@ class LandingPageTest extends TestCase
         $this->assertStringContainsString('data-chat-form', $content);
         $this->assertStringContainsString('Wyślij', $content);
         $this->assertStringNotContainsString('action=', $content);
+    }
+
+    public function test_chat_widget_receives_limits_from_settings(): void
+    {
+        $this->get('/')->assertOk()
+            ->assertSee('data-max-messages="4"', false)
+            ->assertSee('data-max-chars="'.config('claude.MAX_MESSAGE_CHARS').'"', false);
+
+        Setting::create(['key' => 'MAX_MESSAGES', 'value' => '6']);
+
+        $this->get('/')->assertOk()->assertSee('data-max-messages="6"', false);
     }
 }

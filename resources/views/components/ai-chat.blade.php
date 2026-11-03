@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div data-chat class="flex min-w-0 flex-[1.6_1_480px] flex-col overflow-hidden rounded-2xl border border-line bg-surface">
+        <div data-chat data-max-messages="{{ (int) \App\Models\Setting::resolve('MAX_MESSAGES') }}" data-max-chars="{{ (int) \App\Models\Setting::resolve('MAX_MESSAGE_CHARS') }}" class="flex min-w-0 flex-[1.6_1_480px] flex-col overflow-hidden rounded-2xl border border-line bg-surface">
             <div class="flex items-center gap-3 bg-surface-raised px-6 py-4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M18 16v4M16 18h4"/></svg>
                 <div>
