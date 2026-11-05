@@ -113,7 +113,9 @@ jobs:
              find bootstrap -mindepth 1 -maxdepth 1 ! -name cache -exec rm -rf {} + 2>/dev/null || true
              mkdir -p public bootstrap
              cp -a .deploy-new/. .
-             rm -rf .deploy-new"
+             rm -rf .deploy-new
+             mkdir -p bootstrap/cache storage/logs storage/framework/cache/data storage/framework/sessions storage/framework/views
+             chmod -R ug+rwX bootstrap/cache storage"
 
       - name: Migrate and optimize
         env:
