@@ -302,5 +302,14 @@
       "Czy spotkania będą online, czy na miejscu?",
       "Jak szybko Pan odpowiada?"
     ]
-  }
+  },
+    {
+        "parent_id": "ai_agenci",
+        "type": "ai",
+        "text": "Mogę więc stworzyć asystenta AI w Messengerze, Telegramie, WhatsAppie i na stronie internetowej, który będzie odpowiadał na różne pytania i komunikował się z klientem. Mogę to zrobić na platformie n8n lub opracować backend indywidualnie, zgodnie z Państwa potrzebami.",
+        "questions": [
+            "Czy można stworzyć AI bota w Telegramie?",
+            "Czy można stworzyć AI bota w Messengerze?"
+        ]
+    }
 ]

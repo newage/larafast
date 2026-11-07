@@ -12,7 +12,7 @@ class FaqCommandsTest extends TestCase
         config(['services.pinecone.api_key' => null, 'services.pinecone.index_name' => null]);
 
         $this->artisan('faq:seed', ['--dry-run' => true])
-            ->expectsOutputToContain('130 records')
+            ->expectsOutputToContain('133 records')
             ->assertSuccessful();
     }
 
