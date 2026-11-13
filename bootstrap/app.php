@@ -23,7 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->replace(TrustProxies::class, TrustCloudflare::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(fn (TooManyRequestsHttpException $e, Request $request) => $request->is('chat')
+        $exceptions->render(fn (TooManyRequestsHttpException $e, Request $request) => $request->is('chat', 'contact')
             ? response()->json(['type' => 'error', 'message' => 'Too many requests'], 429, $e->getHeaders())
             : null);
         $exceptions->shouldRenderJsonWhen(

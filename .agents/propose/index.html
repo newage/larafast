@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vadym Leontiev · Automatyzacje AI, chatboty i aplikacje dla firm</title>
+<meta name="description" content="Chatboty AI 24/7, automatyzacja procesów między działami i aplikacje na Laravel i Symfony. Jeden programista z 20 latami doświadczenia: MVP w 2–3 dni, płatność po zakończeniu pracy, faktura VAT.">
+<meta property="og:title" content="Vadym Leontiev · Automatyzacje AI dla firm">
+<meta property="og:description" content="Chatboty AI, automatyzacje i aplikacje webowe. MVP w 2–3 dni, start w 6 dni. Bez software house'u i bez narzutów.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:url" content="https://develop.vadymleontiev.dev/">
+<meta property="og:image" content="https://develop.vadymleontiev.dev/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235B3FD6'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' fill='white' text-anchor='middle'%3EVL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+/* ===== Tokens ===== */
+:root{
+  --bg:#FAFAF9; --surface:#FFFFFF; --ink:#0B0B0F; --ink-2:#3F444D; --muted:#6B7280;
+  --line:#E7E5E4; --line-2:#F0EEEC; --accent:#5B3FD6; --accent-soft:#EFEBFF; --peach:#FDEBDD;
+  --ok:#157F4B; --err:#B42318;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:40px; --s8:48px; --s9:64px; --s10:80px; --s11:96px;
+  --mono:'Geist Mono', ui-monospace, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:var(--s11)}
+body{font-family:'Geist',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:24px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:600;text-wrap:balance;letter-spacing:-0.02em}
+p{text-wrap:pretty}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.mono{font-family:var(--mono)}
+.wrap{max-width:1024px;margin:0 auto;padding:0 var(--s5)}
+.skip{position:absolute;left:var(--s4);top:-60px;background:var(--ink);color:#fff;padding:var(--s2) var(--s3);border-radius:8px;z-index:100;transition:transform .3s var(--ease)}
+.skip:focus{transform:translateY(76px)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* ===== Buttons ===== */
+.btn{display:inline-flex;align-items:center;gap:var(--s2);font-size:16px;line-height:24px;font-weight:600;padding:var(--s2) var(--s3);border-radius:9999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:transform .5s var(--ease),background-color .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease)}
+.btn i{font-size:20px}
+.btn:hover{transform:translateY(-2px);border-color:#D6D3D1;box-shadow:0 8px 24px rgba(11,11,15,.06)}
+.btn:active{transform:scale(.98)}
+.btn-dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn-dark:hover{background:#26262E;border-color:#26262E}
+.btn-lg{padding:var(--s3) var(--s5)}
+.btn-sm{font-size:14px;line-height:20px;padding:var(--s2) var(--s3)}
+.btn-sm i{font-size:16px}
+
+/* ===== Nav ===== */
+.nav{position:fixed;top:var(--s3);left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:var(--s5);padding:var(--s2) var(--s2) var(--s2) var(--s4);background:rgba(250,250,249,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:9999px;width:max-content;max-width:calc(100% - var(--s5))}
+.brand{display:flex;align-items:center;gap:var(--s2);font-weight:600;white-space:nowrap}
+.brand .mark{font-family:var(--mono);font-size:12px;line-height:16px;color:var(--accent);border:1.5px solid var(--accent);border-radius:6px;padding:2px var(--s1)}
+.nav ul{display:flex;gap:var(--s1);list-style:none}
+.nav ul a{display:block;font-size:14px;line-height:20px;color:var(--ink-2);padding:var(--s2) var(--s3);border-radius:9999px;transition:background-color .3s var(--ease),color .3s var(--ease)}
+.nav ul a:hover{background:var(--line-2);color:var(--ink)}
+.nav ul a[aria-current="true"]{background:var(--ink);color:#fff}
+.burger{display:none;width:40px;height:40px;border-radius:9999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;position:relative}
+.burger span{position:absolute;left:12px;width:16px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform .5s var(--ease)}
+.burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:22px}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(3px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){transform:translateY(-3px) rotate(-45deg)}
+.panel{position:fixed;inset:0;z-index:40;background:rgba(250,250,249,.94);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:var(--s11) var(--s5) var(--s6);display:flex;flex-direction:column;gap:var(--s2);opacity:0;pointer-events:none;transition:opacity .5s var(--ease)}
+.panel.open{opacity:1;pointer-events:auto}
+.panel a{font-size:30px;line-height:36px;font-weight:600;padding:var(--s3) 0;border-bottom:1px solid var(--line);opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.panel.open a{opacity:1;transform:none}
+.panel .btn{margin-top:var(--s5);justify-content:center;font-size:16px;line-height:24px;border-bottom:1px solid var(--ink)}
+
+/* ===== Hero ===== */
+.hero{padding:160px 0 var(--s9);text-align:center}
+.avatar{width:96px;height:96px;margin:0 auto var(--s6);border-radius:9999px;padding:4px;background:var(--surface);border:1px solid var(--line);box-shadow:0 8px 24px rgba(11,11,15,.06)}
+.avatar img,.avatar .fallback{width:100%;height:100%;border-radius:9999px;object-fit:cover}
+.avatar .fallback{display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-size:24px;line-height:32px;font-weight:500}
+.eyebrow{display:inline-flex;align-items:center;gap:var(--s2);font-family:var(--mono);font-size:12px;line-height:16px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:9999px;padding:var(--s1) var(--s3);margin-bottom:var(--s5)}
+.eyebrow .dot{width:8px;height:8px;border-radius:9999px;background:var(--ok);box-shadow:0 0 0 4px rgba(21,127,75,.14)}
+.hero h1{font-size:48px;line-height:1.08;max-width:680px;margin:0 auto;background:linear-gradient(90deg,#000 0%,#666 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:4px}
+.hero .sub{font-size:20px;line-height:28px;color:var(--muted);max-width:680px;margin:var(--s5) auto 0}
+.cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s3);margin-top:var(--s6)}
+.proof{margin-top:var(--s5);font-family:var(--mono);font-size:14px;line-height:20px;color:var(--muted)}
+
+/* ===== Card shell (bedcode style) ===== */
+.shell{background:var(--accent-soft);border-radius:24px;padding:var(--s3)}
+.shell-in{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:var(--s5)}
+.shell-head{display:flex;justify-content:space-between;align-items:center;gap:var(--s4);flex-wrap:wrap;font-family:var(--mono);font-size:14px;line-height:20px;margin-bottom:var(--s5)}
+.legend{display:flex;gap:var(--s4);color:var(--muted);font-size:12px;line-height:16px}
+.legend span{display:inline-flex;align-items:center;gap:var(--s2)}
+.legend b{width:16px;height:4px;border-radius:2px;background:var(--accent);display:inline-block}
+.legend b.k{background:var(--ink)}
+
+/* Timeline */
+.tl{display:grid;grid-template-columns:220px repeat(6,1fr);row-gap:0}
+.tl .days{display:contents}
+.tl .day{font-family:var(--mono);font-size:12px;line-height:16px;color:var(--muted);padding-bottom:var(--s3);border-bottom:1px solid var(--line)}
+.tl .lbl{padding:var(--s4) var(--s4) var(--s4) 0;border-bottom:1px solid var(--line-2)}
+.tl .lbl h3{font-size:16px;line-height:24px}
+.tl .lbl p{font-family:var(--mono);font-size:12px;line-height:16px;color:var(--muted);margin-top:var(--s1)}
+.tl .track{grid-column:2 / -1;position:relative;border-bottom:1px solid var(--line-2);display:grid;grid-template-columns:repeat(6,1fr);align-items:center}
+.bar{height:6px;border-radius:9999px;background:var(--accent);position:relative;transform-origin:left;transform:scaleX(0);transition:transform .8s var(--ease)}
+.bar.k{background:var(--ink)}
+.in .bar{transform:scaleX(1)}
+.bar::before,.bar::after{content:"";position:absolute;top:50%;width:12px;height:12px;border-radius:9999px;background:#fff;border:2px solid var(--ink);transform:translateY(-50%)}
+.bar-note.end{left:auto;right:0}
+.bar::before{left:-2px}.bar::after{right:-2px}
+.bar-note{position:absolute;top:calc(50% + 12px);left:0;font-family:var(--mono);font-size:12px;line-height:16px;color:var(--ink-2);white-space:nowrap}
+.tl-foot{margin-top:var(--s5);display:flex;gap:var(--s3);flex-wrap:wrap;font-family:var(--mono);font-size:12px;line-height:16px;color:var(--muted)}
+.chip{border:1px solid var(--line);border-radius:9999px;padding:var(--s1) var(--s3);background:var(--bg)}
+
+/* ===== Sections ===== */
+section.block{padding:var(--s11) 0}
+.kicker{font-family:var(--mono);font-size:14px;line-height:20px;color:var(--accent);margin-bottom:var(--s3)}
+.h2{font-size:36px;line-height:40px;max-width:680px}
+.lead{font-size:18px;line-height:28px;color:var(--muted);max-width:680px;margin-top:var(--s4)}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* Solo vs house */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);margin-top:var(--s8)}
+.vs-card{border:1px solid var(--line);border-radius:16px;padding:var(--s5);background:var(--surface)}
+.vs-card.me{background:var(--ink);color:#fff;border-color:var(--ink)}
+.vs-card h3{font-size:20px;line-height:28px;display:flex;align-items:center;gap:var(--s2)}
+.vs-card .tag{font-family:var(--mono);font-size:12px;line-height:16px;color:var(--muted);margin-top:var(--s1)}
+.vs-card.me .tag{color:#A8A8B3}
+.vs-card ul{list-style:none;margin-top:var(--s5);display:grid;gap:var(--s3)}
+.vs-card li{display:flex;gap:var(--s3);align-items:flex-start;color:var(--ink-2)}
+.vs-card.me li{color:#E7E7EC}
+.vs-card li i{font-size:20px;flex:none;margin-top:2px}
+.vs-card li i.x{color:#A8A29E}
+.vs-card li i.v{color:#B9A8FF}
+
+/* Services */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s8)}
+.svc{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:var(--s5);transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .3s var(--ease)}
+.svc:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(11,11,15,.07);border-color:#D6D3D1}
+.svc .ic{width:40px;height:40px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:24px}
+.svc.entry .ic{background:var(--ink);color:#fff}
+.svc h3{font-size:20px;line-height:28px;margin-top:var(--s4)}
+.svc p{color:var(--muted);margin-top:var(--s2);flex:1}
+.svc .tags{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4)}
+.svc .tags span{font-family:var(--mono);font-size:12px;line-height:16px;color:var(--ink-2);background:var(--bg);border:1px solid var(--line);border-radius:9999px;padding:2px var(--s2)}
+.svc .price{display:flex;justify-content:space-between;align-items:center;margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--line-2);font-family:var(--mono);font-size:14px;line-height:20px}
+.svc .price span:first-child{color:var(--muted)}
+.svc .price b{font-weight:500}
+.svc .badge{align-self:flex-start;font-family:var(--mono);font-size:12px;line-height:16px;color:var(--accent);background:var(--accent-soft);border-radius:9999px;padding:2px var(--s2);margin-top:var(--s4)}
+.price-note{margin-top:var(--s5);display:flex;gap:var(--s3);align-items:flex-start;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:var(--s4) var(--s5)}
+.price-note i{font-size:24px;color:var(--accent);flex:none}
+
+/* Animated service icons */
+.svc .ic{width:48px;height:48px}
+.svc .ic svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.svc .ic .fill,.svc .ic .a-dot,.svc .ic .a-runner{fill:currentColor;stroke:none}
+.svc .ic .lens-fill{fill:var(--ink)}
+.a-lens{animation:lens 3.6s var(--ease) infinite}
+@keyframes lens{0%,100%{transform:translate(0,0)}33%{transform:translate(7px,3px)}66%{transform:translate(11px,-1px)}}
+.a-dot{animation:dot 1.4s var(--ease) infinite;transform-box:fill-box;transform-origin:center}
+.a-dot:nth-of-type(2){animation-delay:.18s}.a-dot:nth-of-type(3){animation-delay:.36s}
+@keyframes dot{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-2.5px);opacity:1}}
+.a-flow{stroke-dasharray:2 2.5;animation:flow 1.6s linear infinite;opacity:.55}
+@keyframes flow{to{stroke-dashoffset:-9}}
+.a-line{stroke-dasharray:7;stroke-dashoffset:7;animation:line 3.2s var(--ease) infinite}
+.a-line.l2{animation-delay:.25s}.a-line.l3{animation-delay:.5s}
+@keyframes line{0%{stroke-dashoffset:7}30%,80%{stroke-dashoffset:0}100%{stroke-dashoffset:-7}}
+.a-up{animation:up 3.2s var(--ease) infinite}
+@keyframes up{0%,40%{transform:translateY(2px);opacity:0}60%,85%{transform:translateY(-1px);opacity:1}100%{transform:translateY(-4px);opacity:0}}
+.a-star{transform-box:fill-box;transform-origin:center;animation:star 2.8s var(--ease) infinite}
+.a-star.s2{animation-delay:.7s}
+@keyframes star{0%,100%{transform:scale(.82) rotate(0);opacity:.7}50%{transform:scale(1.08) rotate(45deg);opacity:1}}
+.a-br.l{animation:brl 2.4s var(--ease) infinite}.a-br.r{animation:brr 2.4s var(--ease) infinite}
+@keyframes brl{0%,100%{transform:translateX(0)}50%{transform:translateX(-1.5px)}}
+@keyframes brr{0%,100%{transform:translateX(0)}50%{transform:translateX(1.5px)}}
+.a-cur{animation:cur 1s steps(1) infinite}
+@keyframes cur{50%{opacity:0}}
+
+/* Tagline reveal */
+.tagline{padding:var(--s11) 0 120px}
+.tagline p{font-size:48px;line-height:1.08;font-weight:600;letter-spacing:-0.02em;max-width:820px;text-wrap:balance}
+.tagline .w{color:rgba(11,11,15,.28);transition:color .6s var(--ease)}
+.tagline .w.on{color:var(--ink)}
+.tagline .w.acc.on{color:var(--accent)}
+
+/* Rules */
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s4);margin-top:var(--s8)}
+.rule{display:flex;gap:var(--s4);border:1px solid var(--line);border-radius:16px;padding:var(--s5);background:var(--surface)}
+.rule .n{font-family:var(--mono);font-size:14px;line-height:20px;color:var(--accent);flex:none;width:32px}
+.rule h3{font-size:18px;line-height:28px}
+.rule p{color:var(--muted);margin-top:var(--s1)}
+
+/* Projects */
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s8)}
+.proj{border:1px solid var(--line);border-radius:16px;padding:var(--s5);background:var(--surface);display:flex;flex-direction:column}
+.proj .meta{font-family:var(--mono);font-size:12px;line-height:16px;color:var(--muted)}
+.proj h3{font-size:24px;line-height:32px;margin-top:var(--s2)}
+.proj p{color:var(--ink-2);margin-top:var(--s2);flex:1}
+.proj .tags{font-family:var(--mono);font-size:12px;line-height:16px;color:var(--accent);margin-top:var(--s4)}
+.proj a.link{display:inline-flex;align-items:center;gap:var(--s1);margin-top:var(--s4);font-weight:600;font-size:14px;line-height:20px;transition:color .3s var(--ease)}
+.proj a.link:hover{color:var(--accent)}
+
+/* Recommendations */
+.recs{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s8)}
+.rec{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;padding:var(--s5);background:var(--surface)}
+.rec .q{font-size:32px;color:var(--accent)}
+.rec blockquote{font-size:18px;line-height:28px;color:var(--ink);margin-top:var(--s3);flex:1;text-wrap:pretty}
+.rec figcaption{display:flex;flex-direction:column;gap:2px;margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--line-2);font-size:14px;line-height:20px;color:var(--muted)}
+.rec figcaption b{color:var(--ink);font-weight:600}
+.rec figcaption .mono{font-size:12px;line-height:16px}
+.rec-foot{margin-top:var(--s5);font-size:14px;line-height:20px;color:var(--muted)}
+.rec-foot a{color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:var(--s1);transition:color .3s var(--ease)}
+.rec-foot a:hover{color:var(--accent)}
+
+/* Lead form */
+.form-shell{max-width:760px;margin:var(--s8) auto 0;text-align:left}
+.lead-form{padding:var(--s6)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5)}
+.field{display:flex;flex-direction:column;gap:var(--s2)}
+.full{grid-column:1/-1}
+.field label{font-size:14px;line-height:20px;font-weight:600}
+.req{font-family:var(--mono);font-size:12px;line-height:16px;font-weight:400;color:var(--accent);margin-left:var(--s1)}
+.field input,.field textarea{font:inherit;font-size:16px;line-height:24px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:var(--s3) var(--s4);outline:none;transition:border-color .3s var(--ease),background-color .3s var(--ease)}
+.field textarea{resize:vertical;min-height:144px}
+.field input::placeholder,.field textarea::placeholder{color:#A8A29E}
+.field input:hover,.field textarea:hover{border-color:#D6D3D1}
+.field input:focus,.field textarea:focus{border-color:var(--accent);background:var(--surface)}
+.field input[aria-invalid="true"]{border-color:var(--err);background:#FEF3F2}
+.ferr{font-size:14px;line-height:20px;color:var(--err)}
+.fhint{font-family:var(--mono);font-size:12px;line-height:16px;color:var(--muted);text-align:right}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.form-foot{display:flex;justify-content:space-between;align-items:center;gap:var(--s5)}
+.consent{font-size:12px;line-height:16px;color:var(--muted);max-width:360px}
+.consent a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.btn[disabled]{opacity:.6;pointer-events:none}
+.btn .spin{width:16px;height:16px;border-radius:9999px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.sent{text-align:center;padding:var(--s6) 0;outline:none}
+.sent-ic{width:48px;height:48px;border-radius:9999px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:24px;margin:0 auto var(--s4)}
+.sent h3{font-size:24px;line-height:32px}
+.sent p{color:var(--muted);margin-top:var(--s2)}
+.alt{margin-top:var(--s8);color:var(--muted)}
+
+/* Chat */
+.chat{margin-top:var(--s8)}
+.chat-win{display:flex;flex-direction:column;height:440px}
+.chat-log{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:var(--s3);padding-right:var(--s1)}
+.msg{max-width:80%;padding:var(--s3) var(--s4);border-radius:16px;font-size:16px;line-height:24px;white-space:pre-wrap}
+.msg.bot{background:var(--bg);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.me{background:var(--ink);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg.err{background:#FEF3F2;border:1px solid #FECDCA;color:var(--err);align-self:flex-start}
+.skel{align-self:flex-start;display:grid;gap:var(--s2);width:240px;padding:var(--s3) var(--s4);border:1px solid var(--line);border-radius:16px;border-bottom-left-radius:4px;background:var(--bg)}
+.skel i{display:block;height:12px;border-radius:9999px;background:linear-gradient(90deg,var(--line-2),var(--line),var(--line-2));background-size:200% 100%;animation:sh 1.2s var(--ease) infinite}
+.skel i:nth-child(2){width:72%}
+@keyframes sh{to{background-position:-200% 0}}
+.suggest{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s4) 0 var(--s3)}
+.suggest button{font:inherit;font-size:14px;line-height:20px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:9999px;padding:var(--s1) var(--s3);cursor:pointer;transition:border-color .3s var(--ease),color .3s var(--ease),transform .5s var(--ease)}
+.suggest button:hover{border-color:var(--accent);color:var(--accent)}
+.suggest button:active{transform:scale(.98)}
+.chat-form{display:flex;gap:var(--s2);border:1px solid var(--line);border-radius:9999px;padding:var(--s1);background:var(--bg);transition:border-color .3s var(--ease)}
+.chat-form:focus-within{border-color:var(--accent)}
+.chat-form input{flex:1;border:0;background:transparent;font:inherit;padding:0 var(--s3);outline:none;min-width:0}
+.chat-form .btn{padding:var(--s2) var(--s4)}
+.chat-hint{font-family:var(--mono);font-size:12px;line-height:16px;color:var(--muted);margin-top:var(--s2);padding-left:var(--s3)}
+.chat-hint.e{color:var(--err)}
+
+/* Final CTA */
+.final{text-align:center;padding:var(--s11) 0}
+.final .h2{margin:0 auto}
+.final .lead{margin:var(--s4) auto 0}
+.copy{display:inline-flex;align-items:center;gap:var(--s3);margin-top:var(--s6);font-family:var(--mono);font-size:20px;line-height:28px;padding:var(--s3) var(--s5);border:1px dashed #D6D3D1;border-radius:16px;background:var(--surface);cursor:pointer;transition:border-color .3s var(--ease),transform .5s var(--ease)}
+.copy:hover{border-color:var(--accent)}
+.copy:active{transform:scale(.98)}
+.copy small{font-size:12px;line-height:16px;color:var(--muted)}
+.copy i{color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:var(--s6) 0;font-size:14px;line-height:20px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--s4)}
+footer nav{display:flex;gap:var(--s5);flex-wrap:wrap}
+footer a:hover{color:var(--ink)}
+
+/* ===== Responsive ===== */
+@media (max-width:960px){
+  .nav ul,.nav .btn-sm{display:none}
+  .burger{display:block}
+  .nav{gap:var(--s4);width:calc(100% - var(--s5));justify-content:space-between}
+  .grid3,.projects,.recs{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .hero{padding-top:128px}
+  .hero h1{font-size:36px;line-height:40px}
+  .hero .sub{font-size:18px;line-height:28px}
+  .h2{font-size:30px;line-height:36px}
+  .tagline p{font-size:30px;line-height:36px}
+  .vs,.rules,.grid3,.projects,.recs{grid-template-columns:1fr}
+  .tl{grid-template-columns:1fr}
+  .tl .day{display:none}
+  .tl .lbl{border-bottom:0;padding:var(--s4) 0 var(--s2)}
+  .tl .track{grid-column:1;padding-bottom:var(--s8)}
+  .fields{grid-template-columns:1fr}
+  .lead-form{padding:var(--s5)}
+  .form-foot{flex-direction:column;align-items:stretch}
+  .form-foot .btn{justify-content:center}
+  .copy small{display:none}
+  .copy{font-size:16px;line-height:24px;padding:var(--s3) var(--s4)}
+  .msg{max-width:92%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
+  .reveal{transform:none}
+  .bar{transform:scaleX(1)}
+  .panel a{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="top">
+  <a class="brand" href="#top" aria-label="Vadym Leontiev, początek strony"><span class="mark">{VL}</span>Vadym Leontiev</a>
+  <nav aria-label="Główna">
+    <ul>
+      <li><a href="#jak">Jak pracuję</a></li>
+      <li><a href="#uslugi">Usługi</a></li>
+      <li><a href="#realizacje">Realizacje</a></li>
+      <li><a href="#rekomendacje">Opinie</a></li>
+      <li><a href="#czat">Czat AI</a></li>
+    </ul>
+  </nav>
+  <!-- TODO: podmień href na link Cal.com / Google Calendar -->
+  <a class="btn btn-dark btn-sm" href="#kontakt"><i class="ph ph-calendar-blank"></i>Umów 15 minut</a>
+  <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="panel"><span></span><span></span></button>
+</header>
+<div class="panel" id="panel" aria-hidden="true">
+  <a href="#jak">Jak pracuję</a>
+  <a href="#uslugi">Usługi</a>
+  <a href="#realizacje">Realizacje</a>
+  <a href="#rekomendacje">Opinie</a>
+  <a href="#czat">Czat AI</a>
+  <a class="btn btn-dark btn-lg" href="#kontakt"><i class="ph ph-calendar-blank"></i>Umów 15 minut rozmowy</a>
+</div>
+
+<main id="main">
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="avatar">
+      <!-- Zdjęcie osadzone jako base64. W Laravel możesz zamienić src na asset('photo.jpg') -->
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wgARCADwAPADASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAAAwQBAgUGAAf/xAAZAQADAQEBAAAAAAAAAAAAAAAAAQIDBAX/2gAMAwEAAhADEAAAAeEkfsESsVbmIqEnW661qbqjXVJPQyEGqYSpzXDPM5LKlpZHhMWHz/B/VkofxuGVuZ0LXaZR3R1Ln5hOspjqnBxsp63hMfRcjZ6YJoKP6JWuiIAHN5ElB4GfBIF7UK1a4iS5i8D4Thftny3AR3RafM29NPStcVn9AvPTy6vQZVwg6v1OkdCdCOmGvX5WX1OXxVsdddNeY0vcVpbGnjQzut/5GW8/rzHC9TvjqTmvirzfTJycW1W/mUY6nkBob2/VlZm+i557psrqOnC1FeHoKCx8Nh+YJNqS75UkQ1R1gvgV8zRoTiwnH1R75B33Rz9E8jl3GbV7N4btYZQv49joWV0qMzGz8hvioDXDhugV9dOrQGSjG86rQpr+Hik0iFZVdgSWMntqOMWuiCs+v6H5h3HRzrU6JBTnNNsJ5k0rNllSR34Tu+MVMDydmWM7RpvNppkFjaRwKnT5Yite+XQvbz11ifJ6NycllsQr1do46TQWf6MBHCZHNhoBzMpmy20EtMEb829pBJzQuGTzJ1h1CHjjH6iu4FMrq+cKKEckkao2nRod4tZfoeG1x+vZtA2rsIt3jxw8+MW09iaie7FbLqoM0oXhiRqw3QFaMQCOhDFDmbt+Vc97a9JkvuHTVFqShZLQPWWG9SdFDKpN+T5zE259hvAZrPp6nBPVa0SibxdaRS65VVDEch0V36lolSKl4IvnoQgit2tUinwmBEAWsp08RZVmo49i7WWwGSsBpKnXnUs+hMnoWnS4/Q2IZYZTUzCJbNc+ybNwEVy4ldN8gSkGiwaxwKi9tzX8LwZR6kjQs1qjA28Bu110jtG0KvAnSsLZNTvTkMF6FQGGZhQoM+XUlafsXZEw4i9DP5XC0xrS3qypUlQXsQrFgaXNsxVFQ7Y/WS4G/wA/WStLxYwHl1mh2JqsYmraqzZ07lZM7NolRq94zJcdUk8o1deetpgUemALOlg7wPgDKua0KOp6LtOE7TDoer72O0XiW/WmQrMWdEOBhFpm0g/XolOZXjdMepml3HqWoHpHYWlja+d24fPgdvw0uwy0DQ7r559Ew3u1nsY6s+pYosxLfr2K3Q3iBPo9BKhOLeeTm3H2cet0/APRfY1zm8bJJJT1Mdgnbz++X/WPm6efX0on6F897rHbQgnstoJX0jRUzjPYEjblaQZEK0nvmf1P47thJ0GenCYKEC9jzP0nOs6pgJ//xAAsEAACAgIBBAEEAQMFAAAAAAAAAQIDBBESBRATISAUIiMxQSQyMwYwNEJD/9oACAEBAAEFAjffZs2UVu63jqMYqKS2cRR0InWOvlH6VEapRIt6RxOPAyOj4mUdR6dZgz7wg2V4/pY3+x0aj7YQ0aZE0cRRNC/XddtGuDycZXV5FMqLhLboqK6yFRo18cXGlk3QhGmuC9ppKVyE7pHHIIq9C8gt67e+y7M4/b/qDC3HhsqpKayuBCBKklDRo136ZT4KVHZDbI48TyU1H1sG1O88kjyisZysNzRGcZGj+O2nq2qN1U8Z0211laKyLJVE6Sdeho0YlStvUNJJFmYqyNWTcm8PGVvX1Et6plWDyMmRytFPIQsvMgU9ayqinruPe67ITTt8ZHjZH32/T6tjbnGJFH6IzHElAsrJwGjpWKou7MhWVU5GUc8fChl9ZcyU5WtejkbNmzZseplVlmMYXX+IlTefUWY5GUbEzKj5MYTOQpdmiyJZA4cpWW+KGHgqkzepRqjkZVmTJI18N92bOTNmNm24bwOqQyoTxnEozY2Fi3Wb7LtolEtgVQ/Pg43Ez+oKCssndJRFEUdnjFWeMdRwOB4zxniPGa0VzlVPpfVvKsnHWXDGzZU2ZcFGzsl20NE4GJj88nPy4wjbGdsuAoMSYtiQoHjHUeE8J4jxDq0OBKA46PcZdK6ryM7F+qrjKU63AUGRgcTRxHAnZ4KpS899i9xhsa9P0Rs0RmmR0yJpDicDgcCSJIlElEdZCDUul9Q2ZNKU+AoHA2bOR+yyO6YW+O+VikeVI3MUZjokOuUGrYohN6jYQl6nLShYmci6/RLJ2O1m5FexQ93/AIb8LIeRRxEhLu5Ct+zl5IZfFw8zhOjfFRFZGB9fQfVUyOamSqrkeJkM2tL6mE15VCO72SotmRw5n00oHCSPIoFPGwzYfkwMfxYrNkWchzJTKnyq19lVa8d3Tooiko89jxpWN4e3HH4Smm2uR5OBi0V2Qlh0yTx4UZDtJZigV57ZDOc415cLDjsyaOUZ2q1z4RjKRyIs2MkYfuTX2paUo7XDjDxS2tI5Ehps8cjJ/tx4cIqPrqP2SlBkaULHhMhiRQ8NN1LgTqjOq3Fuuzb8v8tjEQPIOwlMwH+ST9jND0zgjxnjNaOOxULlBEYmZjeWuNPr6YjGcSHJni2LG+66MTGxvBjNf1E+0DmczkdOf9R/6dtGjgcRpjUjicSuPtROPucNNIUUKMTQl7shux+oyr/qJv3sizZvtgyayprsuyP32Y3o9sRBEEOPbijXw/uleP0S7J9tHExvsydehfBsciRxIr3ATOWxo3oUt90QNcp2v7nI5CkKAoCrKqeVkl8ENkpH6JjnIjZLcLNimWZKrUMrZvZvi4sXez1Tz2b7xRFCRH01dCRv4Snt/DQnoUma2KKiIZCQmI/m6LninI2bEhCNmb/f02fPFXaX6rXre++jiaIo0aP52aKpb75E4wrZo13RskzLe30izUkfya0XQlKLuyceUc2JHNrYshSPIK08x5kW5tVJVnqyUXtVR12vs8dTulP48TicSxaWRYuWLkeDLj2TJdpQ2OgdJ9JXIWMyOOfTRPEhYyk40ojH2vXbLs2vihI4nVMvxEmM6Xk+fGXy4irRwPGKo8SOHaPo2SlxU3yl8eDR+jMzY49dk+c+3RXpwe+yH8kxdtd/0X3e/lZNFmTXRXk3+bINDOkP8u+Mk+6+KF3/AI0dQzFi042a4yi9rvvsi2mvJszsaWLf36Y9ZP8A0rl3R/Bo4nEXdl10aa8rJnlXGJmuoU1OOzffXp/8nrGP5KF2Zhy1kQNacZGzYjQhGu7eiUjr1/3RZJa7Y+XOg+trlCqXkXE12ok7FfHnCcfHMkY/+Wh7g0ITExGjZy2bORschLZ1O7zZ8Xo/fZrT9yWHRZVDXbKm2VpeOS2upw8eYMo/yYr+00a7KRs2cjZs2RiaZkVW49qZGQ4jMKx15VnT7Zu6FmM2z//EACERAAICAgICAwEAAAAAAAAAAAABAhEQEgMgITEEEzBB/9oACAEDAQE/Af3rL6UV0WaGh4SFxi40aI+tEuIars0SFEUSiiiiholCuljZVs1K6UUNDiThQsWRWzocNBSvFlmxsbZl04nUiXs1x9aKF5JejyJTxJE+PTFHH7JYo1KEijXDKPlS9LEhexiFh4RHDE/JyO5ZrCxsbYRsWSGUVlPyLOpqalYbJPoyxO8qRsbEpYY/OVMk7xx+vwnP+d4ei+0pUsKRfWHSy8crzEXKm6P/xAAeEQACAgMBAQEBAAAAAAAAAAAAAQIREBIgAyExUf/aAAgBAgEBPwHMI2+7JRTwhceapZssvj1+fTcjMsTIq3hyofobs2ZuxeopJ4mriMWEeRKVDZZZZZYmRmMcDQoSL1ibF9qRD0skvuKL1+m2xrXFFcR/eJ/mLxs+Pg9cRZCe2Nhvtljz5LCiV2+Y/Fm+2VlFl5r5xRXK4Ss1GsplotDeVl+RGNYn2yEG1fcx8MZGNsRKF/hVZeJjzefL+5mmT8JRjsz/xAA6EAABAgMFBQQIBgIDAAAAAAABAAIDESEQEjFBUSAiMGFxEzKBkQQjM0BSYqHRNEJygpLBsbJDk8L/2gAIAQEABj8C22sAxXZNo0IAbOKqLKOUnC3kr92475Vqw4O4z4xHILntS2a26gp0F1WH6J0N2LTLiBjUGMwFlVutmqMKwCwasBwh6S0VFHcS/LedZQUU3LEKTGl3RexDf1GSrEgj6r8Qz+Kp6TD8Wqj4LvFb0J3UVW66yq1tdDd3XiSdDdi0y4TWnBCaqrrKu5K9Ed2TeamfWHV+CuwvJgkqAN6qsc+C9vE81T0iIqR59Qt5gd+goNjSvfPQ+a9VFlydUL1rCPmGC3XT2GxxnQ8IxnOoKWXn+qh/Uo3AJ5lSh73NTiOLuBUTU4MQt5YhBnpAuf6lXoTuydyXr2zb8YwU2mx48eCGjEpsJs54CS7aPWJ/qsZD/KqZDTi7lWfAf6WM8jPLqr/ov/X9lJ1CE6WY4LTpVGPF7xw5KfkNVefxw9huuCuOo4Yt+yD2Ok8YO1RhRRIjEFG73TXgYUCI/KPqr8THTTYw4oe0ycMCrr6Ed4f2F2kP2je6dUARIjgG6Mc0PhGFuS+3HDmm64YFdlFp/wCT9lPXgRWuxLaIA4WXRNztAJr2UT6L2D/MKfYRfCS7kUDmxVcB1ohnwKWVsvDG75ppryntkjJVQod0ynLJOkFd8+dlSu99FSIJrEFVYFOFEcDo6oVSAcxoqFXp+Wa9kG/qcq9n5lf8PmVSHB/mfsvw/wDFwK32vZ1at1wd0TebFDn8O28Zzs6p7w86pruSKm4z5Kcyg7RTopIzyU3smVK6fNQ3NGDv6U1hNUgz8UXCAZCmKoptTN1oeXd6VVADnsL2za6vOh8kA04bb+lskAMqKax2WtaDUyPO0HmFdcJSswVAFOgI0V1NDh809E0shOc29K8ArjcNdt3RSt1X32g45YWlBTbRdwFd0BZWSvYZSxTAakOV3nt+BXhwMlWuzTA7IV+VE0aFXhhLbYrw91HXgQzzR91GgR229eFn4LUW6lf0FPZkp9TwJoiYnpsyHBpTbiSx4M035abEyqccyz4USF+7Zk113mpRBfb8QxWJ8l3lQg7O+ZKkOIJ5mw2OcFvcJkTKcjt0WC7qpEf5qr3FTKwWCw2A3g9kzvZ8rQD3mUPBx4JPA3TvnBFxJNsTw9xujx23iSLogp/lFwEgcBsPHL3Cf5z3QpPMwc1PacSi2IKSoFdOGR2OoXTjGI8ya2pTnupoNLLrqsV5tQdm75onSQRdm2o2G2S4sOD+87Hy6FXhNTtmnxT+Z1EQUW6GVoQ2seBFOQN0eCzWS0XXBS3q5BSiNkRaILO8/wCgWgsPzVtHD0t3RXJFsUSdbSk+eCy6aKG4NDiDg4UKMSBduGobNARQRPPKz//EACYQAQACAgICAQQDAQEAAAAAAAEAESExQVEQYXGBkaHBILHw0eH/2gAIAQEAAT8hHwWLHyL4SoHhQY/uA1QHhXsz9iFk5WZ+riNNoe6l9ou+oFnqOop7bPzHBNnUssNviXB7jhf0gK5y4scxWdaeuXLlxfD4rzBz/wBwbDmH2y52XLuSbFzBKVaWJzayrld4liqYn5O4r6M3TsEKPirv2gq0xEY8NGJh1CrUt4JKlSpyrbeiFuB1F0mQJr2ZRpPnEHzR9ZgH7kNcwFGOYGX5ldQBxB4fzKIZzDG4MZIhp1knouP8MFGQZRXixSnwGHwC5cr9MlgYFqTcb+Wia32ZkD9C4rNTs4q/Hr+kT1/CmHaOkIJ+j/3KtmPhfiL4r65gpRZFfELrf1bhKMHUBW0L1Akpi8FMQQqmDUu4icZkjHOAtmIKricRcrgu0C5Sl2vP2maZc1fZL4V+Ai782rYsovQqXuYtBvzGMlOiNCB3Swkj0MAy0/7GXcL8iitAPUSxVe4ImI/QYQAKfO8SvwkVeLD4qnxDEcT3PYMDEV0fq4j7JK/2zNNtW0fBL/j3qIGD+CJ1jJKi+RHPlfL9JiFbF7/5StW+Ti/Tn6SnQ8G5/wAh4HdcwKVyTCeQp8kCiUxjJKuYvIWOZKlZ0SrkwUc3A6/9RbloK3GWHCdSqYZZdup8XBTZD2hfi+yKHdTumeGHbZ8pj/iabGk59BMpU7U4f84mHr1I7GG93bGMXFAjaXzDKJD5PA8Z1FqZm1rx15y1mHSWz4z0QULRb3HuRZqLqLhK/KP6e4PYfq9+k2ScWvRl+PVE+dQdRalxmVBeG6UV4VsFL21y6iHd109RpOCTpw8o9UwdQuT0RdQ7kHqPpOpDrVeNnqCw32Oya9wmRCgFfQ6+IoJNI8RPGU8CWLIlGHFLoi2duHb34o5Mpwy+YueYBZnHRndykEgN1KFYgZQuyV/WCahdeHlqW4zfRDGLOnP+FEAPbzz0/gr0hvgQ+yZlbaG/U1bFVRNqpBn+6n7jeQ/zzFNgPk/cvnaW/qJ5T5f2mLPyOYqZMyy0azqAXe4juDYojaaiHL7sU5zMAVSYMsGsGunJGfhXsqPnDiXKJWNnCIc3rMOFnA7cJjS1ogHZtdnPjH6IW01flBlW2iIsfmSq1+TEansjv/ZMIVhXacwjOcC6DJXRHX+5/sE23PiO+29UwBlfQ/uHea9/8aOF7Zz8kVTVdrlvHiiatQ11KTDwPi42GRoGCtW3EIrL53KAt3RLhFMJfxGrheyYInAaCDTB55i4K/WYED6I9lnu7JisxlK5Gy3CQCtZYi8L/Yl7ZhS3rmiZd/hKNqWxxNETvlI1H4oFKgD0LcmYR1bYFr8iAlkFFkrmcxxEcWGCr/uYQuMSsISLSVA2qjSOAAPcPCuHpEvCTURbGr9znbd3tf6/cpB3LoNS6aZkQd6+JvAvslNAW6kimWFOL1CQ4s83oqdLBAu4VBG9MJf8gGO7n2HgRRxT8wNnD6VLtV4sPEQsZu03i5mKV0LxWIK6XgzFmX4cSu+quoKB/IizpwAObm1qe001+YycFtOXKxz0JxDmB4Wio2mEdwr7VOPBFmFNh9p6lQfEXr8IUKVvBIKsRhnByJ1ArwSdQHDAGWi5luQx7gPeH4idoHwCM/kuVHzf9S5Ep/U4guVBmEV0QQsiWty9zDVTBVTFFrcUhVgPcF5gW1Mh0SzjzDxOaiLlyllQ8Z+AkTVOJhOYQxKJxE63DCARWFLCmWEVj1Ayh40ZpfeItNbVYp7PE/wN+iGBjL6PN+RZg8FDFfcpVZ+bcqeDUHoJroXAsVtlvQy2LPjTSZXCTtjFy/4A4w2RMKu+ULOIFwM1LxLTdASr5i01EuViU6iKyLxr3ACnMKwihM5XiXEeSHJhFqL+TmDXH82TWDThm02pc2htliTCOdz5hMMAxM+JSDuolwk7fnwO0x1EFPEOJzOkTENr5KleBGDwloOcH+n9R4INRVkY2oLpPwC6+Scr6rljj9Y1+QhpglLoh8IwGvK4Mr9JhKaBV+GRezB1Hzx0eNX5f4BEZeBlN+oyL/QuIo6uXEz4iXDNJiHwgOHGb2D2QesSv9gx2ivzOubJX7SyICsTSgm598XwLLmfA8GfEprZyXXK+F5P9QxYg1NkL5lXiBiUdh4AeIOrBeYHmUJXEFplLJWKzzK8XL8VbRIQ7odTr3FYBcrH3ElLOYERzLTclXKgS6dS+amGLGpXZ4BmXUOTLr2o3K8Pnlg5mJX7bYPshl0SsyievCnuBmE8OZd4S3341cqiP4gXUdwwLlRwoZWxEa1+zv6SzLMVs9ykGRyMuXF8LioRdtrLQn06+fmbFbdxHc4iSnPRHJeY4WDcLtmTKqLYW4IHdQ0qPiprmc7iqUKBZLw1rp9TIxssu+0IJwEjD5WRwcxrtfkQKLmIrCFM/OWaOz0wsRVhh1h08FViDAVAVUI3LvwBNxKbsRv6H7mDnjG/zNyrOYOMsbayt6mcDCDT0w8NgKahOVmHriGFwlRV9tB1L5YqebxqX5gxKJrjs6hhBQ3CyoHmHSAM9eFsvtCLfwbCcJHxNbu3rECn8iKCXQtVxKom1DYxq/ueDCjcKn1GZEyOP1LEi4tAIIcceNgQJ2mUpJVuGOrhTBKc4g4IPbuLzUVbWNOyuHbxH32W+51v/kNd31e5mPgpS3cRV0BbQX6Q1dcR4P3OSQPM9QQZw5Hg/9oADAMBAAIAAwAAABDf2S+XovPHGmzsD/a7fdhG9Fo1/FNnJtxSb3KiMKKC6ltLHqZ/8E7T6A4G6gpMrO8fSqXjTeAyJEJtLsbdmPyxXTGSgF42j61wvaG4StyvJMnovOthVllTHZR1Gh0uXmUIukp65qqBGVNiio3q4eue7qOvwQgIYhJxfDcqki+KlKQ02Vy7iaKjcdUah8Ckq44FS9srmov63bFxV8A92/50hju/JWzNlhnL/8QAHREBAQEAAwEBAQEAAAAAAAAAAQARECExQVFhIP/aAAgBAwEBPxDLOFye7P8ABZ+QvCzdeV3nOWrURMpJJmV0LJXy29g38ZW/CVd23jwlnF0Znt4ijtWpVv7J2ODuSBycAYRiIgsyOQTscWKpH7eIvijfrB3phwPtjPZjrOHtlIMm2zG7aYA6WbOuwjou52B2y1eWj2RzuY8+zAX7LLJYZd3XHUssLCZeeoMh9jusD/ItsRwstu3DOWrsScfRKzxkdpd4HXIo2PsD5Gjh+54s4yvqXerOBu3LIW6oTjOFhrb3YhpDbfpA+QPsHyZT1vGw/eUukQ8BZbbEPLODmIMNuWy3dSq62XTAfOTjzEdW8i3QHLB7mxey/8QAHxEBAQEAAwEBAQADAAAAAAAAAQARECExQVEgMGFx/9oACAECAQE/EMg46CDOdtmPh4RMcsfZFscdpxtizAmbYw5bWOBkShFPzlb/AHxLHTwGNvF3tjwodbD4t5FmxYsSnY2//bsSjjxVxnUlLrwf42LCLo8AJqBqfZn2ZT4SPuXUa8lFjwi2iezLdsRgZLTG1PIrR9szy13IPqX4nN6tvYNWXe0k/nLpEGwZD8stY4GvGywn2EbOTnyMZINgAW2zyWCS8ksR6tvfP3yMQLatSXc/jB3Ftt4RYQAyycvsWPNfjLHd0M5TemGse77/AA/4CCY8eocljh1UAML3Rfrg5+ocbwWXY+wmR0QYOm//xAAmEAEAAgICAgICAgMBAAAAAAABABEhMUFRYXGBkaGxwdEQ4fDx/9oACAEBAAE/EAIf4Af4FcxhUBZR1z+JQS+Wmc2vyxKAQHioGImDcCBY5ogNc0MXdyxctHJoh1oHRqHyxy+P4isiuDlwb/OINoU1WKmcQlKf95hwFTk4/wBpnB2/0i5d+CZib7W199PklIFjUUPh6Ys1FrqFcFBdTEuzHQRQUFMTcsjcTGLkEvc+H4LmKi7rhhAdKr3LFoGyyyUr9y7dx5hgrrGb5giHEeRgOZlcRXKOHBxEIdPurgVwVor1KAD5YZkLbDHh7/EpLQ5g6gKYVTdMeGQxlKaHkcMYKwB0wYhAq4CXisQwXFexluon+R8IG9Xvj5mBdQe3t+WOHZuw3MVANty8c9wKXxKoW7oUleqTyYMIB1Fd17tuDuAuQMUTGcvxClUvH0RC7tZwkqxJwgmMA0rxCVMBcVx/qWhDDszKgty8ELOIVtn/AGPxFKqUVIAwgIWQDSGFCK3E8coYlS5UWtxEeeE/b9RFCgPmYfBi+PliywT/AMiJEAhqt1L5XMKV/EHqt4B8v8Rs3d5KT6hinyWfmAVwrAuo+I66u/wJQCpmj77TIUN2r0SABRB4S5lKg2wSv3MQMhgwUNjYg7OSKYfIsykq6ik0f5Gk9SsM77p2eHfzDAxAJEC5X1UuTDBSVnhH2JS+IKt4vsM1KQJN4aXivBUDT6TqvMV08tnwETPXar6YPll7Mu0VOeEqG7qmfzFwxirMHw4ctG7xWYX2rAof4OH3LuQqx9biMUnVvQr9xFfaWy+jk/M9FtPvHHup1kG2T/iCMEvZyHFcfcdWd8eJrm2wq6YrkKs0bfWPiYZUGdTFQLAcVCViEjZLaiKNdsYJSSJbDZfH9Q9RocXn6mcbtGPwtHt+pgnBb6vbl9GInSDA0/eRx0esPia4HWoFIC8Sg434gncoWT5mTRUpmziyv6lVqZv+WtfEVsKAn7m/nHqYSQv3wHwfcCGprJa9LteGvmVVN24IhXIlc1/pINscl2JcEO6hQHc7Ecko0jt4j0tRvSCDysqXUNbz4haAXN39d+X1M+BYbfR0RUkXIae+3zCwbVmPIQdFjzHBgvRD7StZ4g3W9yw/uFjm/wCJ2NchE+ycDvzLCizph+420rlXL8eIvr/0iiPP7jgMvymbr2x1UAvVjIDhHI+JWa4BpwxhyPrUCL6lTO6UJ0Jk4i1m79CC1ADof7UidKtROX2+PM4m6Gh0Eu3DMhmDgPzC4ffE0Gvgi+z7IwD33FumNs781GkunuKlfJNAo5IVAIS0Fxuac8cx0aD0zz4CyPNvw457h5jINm8O0x7PxHibCG7wjyPDzFrratHZ8Ny1TDrGZfiM3LZUcTLZS9cXr5Y4I4/PGPnB9wAEG7bOAfzHRRiMLWvMBu3qGaWpiDB6gI0vU4jH7mJy/uAoAcxBGwefMO4ZiWgcdzyvxFIcHMr0Z8TeFck51CtP5OE5ilwq/pHXZxrplNmHcNm7246fmJyoXT3H5i8x1YYYWSh1BrEBgrQzG932y6ivZpoex/x1DMDGriDXXBBQJ4X/AEirATrh/udK9u5SI62twrRV05uGl2PXiZztlMpeMy2HAaYWyrrqXBZXMAFhQyJDuHhii2iy5qvmOtEjyRulIy1VycjpOSL1pBthtI87B4+4eYQYcpzEXqGJiHiL3uFOYZQeDbLSEW7mB5o1HrpB7Cy/simP2TmChz2rB8zE0V0afuXc+GGV/wAWL4JqArRmPbZXFOy+fIKlkKnIIHTjZNRhu5bWBW8sKAt08zdRyrqUU2ASmNigecwFAoxZm5WHOwP/AGVqW8GNcQLBxG48xvrsijkOx/CRuHzN+BeagBdSmXP+DG7h53K7bgW3dwmAuD8bg/lNmJaHwIbl4vYJpeV/1DIEqa20X7r4mSkLNxYXIzRYfMCE+T+iBdwWotdR9R9WQmkugWPSVB0R2WB1n7Bx1AdzOQC0nks3HB6OFc7xMRxFUxgA5lw2WkQe1fuLqs5GPwEoUXmMF+GOl3sZ/wA+YM17k/0qlBReJfkPzFTfdP7BmHauwK5c1/EZLYY4CWfipg3KLiFV3A5YYpBuuMJdG8Jv8RTYja+ogks6NjwxjLdKChaNMwmF0XsSpUpbP+qYiXP0S5fcQvpVgDwYi4VqL0+7Z5ftpGOVcdn/AKESrC5HiXzytkqtv7h4EYUnpmWQEFWxujfNkFVVxMHGyKgALbwSnvGI7ialyN+4fdJrZ7JuAwESxWGLeq+gMCoIaR3HRJAdWopkLfPuGJe1FgURbFyy3HaXHaYNuYe6MMtVx5pCRaEHTNBphAWpB0lQeqWxzRguIog+Aw2lXurYmaT+J/XiItlfFygQpcRdWuAiWAOgffpFy4FvmYOnOMmor4UCarJ+/wBwStcCXY4w43hhhLtpUrsUq8ktQgLqqPqUzUswPnk8SrgVhOnmvDKGCmY5g0XVN4Sc3zKYo54044qKBpWNviVPmNagcR85icywq49es6/CSy0U8Q0MBc3nBEsZ+QaD4vfqAsuhEfcC2l8xoDX4g2XawcqJalqzESRiLcLt/X1N36g18fcuhVlS0vSHYlzM2MopUKb6bvEdF9kX9LmbLO23xTMCN5f6Sv8AcSkT5hwzIFuR9y9xMYMcM4DLcWS2fCLTnmaVwFrE4gp8EIqIxPPE8xVuZqu99RZ4JPqoc+sQLO5RFNGoCuNlj2pjAfMUcGNsXi+DQfRAcUvjiOrVA7lSUo4hFjTmbc4By7+YG7YmNReMW7xNYj5iSwU4uDaAKvVzRhA0PL3z4jYQQZ22/uVAYA/FP6lkUSk5hQzG8V1AC1oey2IVfjVcKwkqqELJ4iArGZnWYgpgaiAwHMML2bqGPRLYlDncvI677lhst1GCFeh7lAaxXUWiaFpIlYA9QKh1CmNM4hFpuP1r34hSvI14IiDy3ziClqtWItEk5iUXEvgepdIBYa0OJfrTaxcDlgpfERbGPMJshrl3AteTqWr9EFlg21BAAVKgh7jAazL/AANV4mAMQW+fqIKzylVYjcX9wRo5JhVhSrgrsX0nNBJ3gr8ReaBWHiLe4soY7X+VB6mGotgcFFxyjAyZ3Dy3ElPEELeCpeuy4hVlcvMBbRSGU0OonuFBPxw+/wC4XQ+eJntDcu1kbqr28Si4JZYsOs3ZplHsTEqmXP1CcM9wLoNriBXsEH7iceAR9BR9xToeAoiMYAcylMQaMS51DfKQRm9K3aHmupkdLU9TAeZQ9CBKHEZyI34mMEOVQMpTrrzK3GQY2FiX3iXBy3jBGgVXEW5q0lCaO15iJBXcCqDlq2AFU6srUw1ACtwBruskSvEq/mOAlRfAiCOaaRBG83lHEuYiojBzCUzZswzMtl16bPwkWHqAeaFAbrLLezVMqhVG7dRDLKr8R4A91+o1FhD8fMMTyGu4oLIb7iqOA0JBM0fENLrTiowBExoJZZoGiNlhrvgjLAqn3FXamyC1W6vL1BdgV04uXqx8xl6xcKOphCOIYqlmXWYeaVG4LUvU2+kjj1cS4FckVIub6ZXkuAaD8nxFiiOgV+IZQk3Sq+5UPXCLaWxNiXXiEU/HMpLj2QXYKwrHgZhA0IQHdXdQQXSWHUQ80qHifMIAFIC9qb/MpWimq0QLFikw5geoeMXwThYCy7XMcf7RhRzG8z6sfiY9/XM0fKUCRgOjKdNblFTa3zDDSl6hYZG8RW0kmVE+RhKBdGX7GDG9eT/qDfSy/uIp+xYRYA5TaGqJpCRbHUEUG8EAlVxTcySvU/UBICKlw3LGA8QWlpdZRkYS8e38R5ZuwvmHGsceZljpv5o/IfkYLUjOuskULGyorUKihTV3qbXwXDfHGpZu6uHdN7lg037iqor9zJizzxHCCjxGoASWDVxuA2QsKBmKTl66OoBlBEErFuY1naRGSkrRCi+y8EbgZQ3fLBl0xu+JguzOKvUVxlYfDLVzyQHDAWMVqvHmKkqr3AV6hgn1cF26iiFOOIXSjpqEXqrOCWU0hY6OuZnldS0OUeZxVbyxg+aa/dXD1C9swUSv8TMMSgunS6priucwso9CyujJmM9xFuLQvqFPwt65jgyqXjqYHl/U7r+gYAATK68wwN7JVqeazDAtQcwAXmyFFnG4PyfuLGG6e6h5OM41E4ATqaOfMThRHZDHXcFzlyQ1XUOu4gqudm6ZR1+1HMsT7I3rnyHbCeAwGROxjLeF3CjC8Nczx6Co/TFTClg9YXfkiR3jv3ee4rty6f3HKXBtvmXWrlLPBN6ZlL7v9HMpqoOGbKYisN/HMSlWU56lsDjnuHuD8xKiQ8XFlqXmhqHSorw7iFkV3MDFnzG8ywcVANN/MA3ijx0eXQdsCi5bG+Hw3b2sFSau28pnDqWIHQ3fk/khyRWqxi9xHmW3uCwJcI+jdfxLUxap1t/UBF9M0cn1+paL43HZYvJXiXbMqbfE8Vu+4FbkbIjDgceo+3b5lro1eIiA6p3EOuszMYfqZphvG5Rjgw6lCNlD9woKWDp6lABVXvuEDp4lha3AeYXLQuhThfJS+YbqEKIo8K8OMOM8TPJVyaD84vG8zKydrj2Z/qCzsCxE5p4a51iClVgbOcWY97g/LZX+CpxELiF3wB/zKIkXHFBfIX8y3g1HxDHrKPDiPNlfEGABeU6JVjqWwsj8QFTC5iLHZeYoyqVjMQQgBplKKq91ARWnFcywoXhnmHVwl0xq2EiBAz7gpQwomSl5wdxMZfW5zFEZKP5C/MotAlKrPqJcbtligVkQLB8S9LtrSmbaC1K7blcG1DalzbmmoZqEEEVoAPNe4kTAwCyh0TAhqJ8aTLucnxcYBEa+BofROWGs+474CPnT+orrrUuYPZfEFljAx0vXziWGTUENOOJTlZN0uX6titNxi7R3x+IOJSGqqVPMFkTRQjo5gxRHJVFAt0cXMDCNVWoJiXEOnD7qXkZV5XbTCfFjGEQgJwvSPMVvowIDOU1kq7PNy3K8rVSsnhXuZIlOB5XQdHjcAsBoU8LKeabyQ2a2H8pPOPEqadz/2Q==" alt="Vadym Leontiev" width="88" height="88">
+    </div>
+    <span class="eyebrow"><span class="dot"></span>Przyjmuję nowe projekty · Warszawa</span>
+    <h1>Chatboty i automatyzacje AI,<br>które pracują za Twój zespół.</h1>
+    <p class="sub">Jestem jednym programistą, nie software housem. Rozmawiasz bezpośrednio ze mną, bez głuchego telefonu i bez narzutów na biuro. Dlatego taniej i szybciej: działające MVP w 2–3 dni.</p>
+    <div class="cta-row">
+      <a class="btn btn-dark btn-lg" href="#kontakt"><i class="ph ph-calendar-blank"></i>Umów 15 minut rozmowy</a>
+      <a class="btn btn-lg" href="#czat"><i class="ph ph-chat-circle-dots"></i>Zapytaj asystenta AI</a>
+    </div>
+    <p class="proof">20+ lat w backendzie · 13 lat architekt Englishdom · faktura VAT B2B</p>
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section class="wrap reveal" id="jak" aria-labelledby="tl-h">
+  <div class="shell">
+    <div class="shell-in">
+      <div class="shell-head">
+        <h2 id="tl-h" class="mono" style="font-size:14px;line-height:20px;font-weight:500;letter-spacing:0">~/projekt · dzień 1 → 6</h2>
+        <div class="legend"><span><b></b>praca</span><span><b class="k"></b>Twoja akceptacja</span></div>
+      </div>
+      <div class="tl">
+        <div class="days"><span></span><span class="day">dzień 1</span><span class="day">dzień 2</span><span class="day">dzień 3</span><span class="day">dzień 4</span><span class="day">dzień 5</span><span class="day">dzień 6</span></div>
+
+        <div class="lbl"><h3>Rozmowa i projekt</h3><p>15 min · potrzeby · projekt</p></div>
+        <div class="track"><div class="bar k" style="grid-column:1/2"><span class="bar-note">akceptujesz projekt</span></div></div>
+
+        <div class="lbl"><h3>Wersja MVP</h3><p>do kliknięcia w przeglądarce</p></div>
+        <div class="track"><div class="bar" style="grid-column:2/4;transition-delay:.15s"><span class="bar-note">testujesz na żywo</span></div></div>
+
+        <div class="lbl"><h3>Funkcje i integracje</h3><p>czat AI · CRM · automaty</p></div>
+        <div class="track"><div class="bar" style="grid-column:4/6;transition-delay:.3s"><span class="bar-note">chatbot, CRM, poczta</span></div></div>
+
+        <div class="lbl"><h3>Start</h3><p>testy · hosting · przekazanie</p></div>
+        <div class="track"><div class="bar k" style="grid-column:6/7;transition-delay:.45s"><span class="bar-note end">działa u Ciebie</span></div></div>
+      </div>
+      <div class="tl-foot">
+        <span class="chip">płatność po zakończeniu</span>
+        <span class="chip">kod i dostępy należą do Ciebie</span>
+        <span class="chip">krótka instrukcja dla zespołu</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLO VS HOUSE ===== -->
+<section class="block reveal" aria-labelledby="vs-h">
+  <div class="wrap">
+    <p class="kicker">~/dlaczego-ja</p>
+    <h2 class="h2" id="vs-h">Jedna osoba zamiast software house'u.</h2>
+    <p class="lead">Nie mam działu sprzedaży, project managera ani biura do opłacenia. Płacisz za pracę, która trafia do Twojej firmy.</p>
+    <div class="vs">
+      <div class="vs-card">
+        <h3><i class="ph ph-buildings"></i>Typowy software house</h3>
+        <p class="tag">sprzedawca → PM → analityk → zespół</p>
+        <ul>
+          <li><i class="ph ph-x x"></i>Wymagania przechodzą przez 3 osoby, zanim trafią do programisty</li>
+          <li><i class="ph ph-x x"></i>W cenie są biuro, sprzedaż i zarządzanie</li>
+          <li><i class="ph ph-x x"></i>Pierwsza wersja po kilku tygodniach</li>
+          <li><i class="ph ph-x x"></i>Każda zmiana to nowe spotkanie i nowa wycena</li>
+        </ul>
+      </div>
+      <div class="vs-card me">
+        <h3><i class="ph ph-user"></i>Pracujesz ze mną</h3>
+        <p class="tag">Ty → ja</p>
+        <ul>
+          <li><i class="ph ph-check v"></i>Mówisz, czego potrzebujesz, osobie, która to buduje</li>
+          <li><i class="ph ph-check v"></i>Bez narzutów na biuro i zespół, więc niższa cena</li>
+          <li><i class="ph ph-check v"></i>MVP po 2–3 dniach, gotowe wdrożenie po 6</li>
+          <li><i class="ph ph-check v"></i>20 lat doświadczenia w systemach dla tysięcy użytkowników</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="block reveal" id="uslugi" aria-labelledby="svc-h" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">~/uslugi</p>
+    <h2 class="h2" id="svc-h">Nie kolejna strona na WordPressie. Systemy, które odciążają ludzi.</h2>
+    <p class="lead">Od chatbota na WhatsAppie po wewnętrzną aplikację łączącą działy. Tam, gdzie wystarczy prosta automatyzacja bez AI, powiem Ci to wprost.</p>
+
+    <div class="grid3">
+      <article class="svc entry">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="14" width="3" height="6" rx="1"/><rect x="10.5" y="10" width="3" height="10" rx="1"/><rect x="18" y="6" width="3" height="14" rx="1"/><g class="a-lens"><circle cx="7.5" cy="7.5" r="3.5" class="lens-fill"/><path d="M10 10l2.5 2.5"/></g></svg></div>
+        <h3>Audyt AI procesów</h3>
+        <p>Przeglądam, jak pracuje Twój zespół, i pokazuję, co warto zautomatyzować, ile to kosztuje i od czego zacząć. Za darmo i bez zobowiązań.</p>
+        <span class="badge">punkt startu · bezpłatnie</span>
+        <div class="price"><span>cena</span><b>za darmo</b></div>
+      </article>
+      <article class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8l-5 4v-4H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><circle class="a-dot" cx="8" cy="10.5" r="1.2"/><circle class="a-dot" cx="12" cy="10.5" r="1.2"/><circle class="a-dot" cx="16" cy="10.5" r="1.2"/></svg></div>
+        <h3>Chatboty AI 24/7</h3>
+        <p>Odpowiadają klientom na podstawie Twoich dokumentów, zapisują na wizyty, a trudne sprawy przekazują człowiekowi. To nie szablon no-code, tylko rozwiązanie pisane pod Twoją firmę.</p>
+        <div class="tags"><span>kod na zamówienie</span><span>WhatsApp</span><span>Telegram</span><span>Messenger</span><span>Instagram</span><span>strona www</span></div>
+        <div class="price"><span>cena</span><b>od 3 000&nbsp;zł netto</b></div>
+      </article>
+      <article class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="a-flow" d="M7.5 6h9M17.8 8.2l-4.5 7.6M10.7 15.8L6.2 8.2"/><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><circle class="a-runner" r="1.4"><animateMotion dur="3.2s" repeatCount="indefinite" path="M5 6H19L12 18Z" calcMode="spline" keyTimes="0;0.33;0.66;1" keyPoints="0;0.35;0.7;1" keySplines="0.22 1 0.36 1;0.22 1 0.36 1;0.22 1 0.36 1"/></circle></svg></div>
+        <h3>Automatyzacja między działami</h3>
+        <p>Zgłoszenie trafia do CRM, tworzy zadanie, fakturę i raport. Nikt nie przepisuje danych z maila do Excela.</p>
+        <div class="tags"><span>CRM</span><span>formularze</span><span>poczta</span><span>arkusze</span><span>faktury</span></div>
+        <div class="price"><span>cena</span><b>od 5 000&nbsp;zł netto</b></div>
+      </article>
+      <article class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 3h8l4 4v14h-12z"/><path d="M11.5 3v4h4"/><path class="a-line l1" d="M6.5 11h6"/><path class="a-line l2" d="M6.5 14h6"/><path class="a-line l3" d="M6.5 17h4"/><g class="a-up"><path d="M20 13v8M17.5 15.5L20 13l2.5 2.5"/></g></svg></div>
+        <h3>Zbieranie i publikacja treści</h3>
+        <p>AI zbiera materiały ze źródeł, porządkuje, tłumaczy i publikuje je na stronie, w katalogu produktów albo w social mediach.</p>
+        <div class="tags"><span>strona</span><span>katalog</span><span>social media</span><span>tłumaczenia</span></div>
+        <div class="price"><span>cena</span><b>od 3 000&nbsp;zł netto</b></div>
+      </article>
+      <article class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="a-star s1" d="M10 3c.6 4 2.6 6 6.5 6.5-3.9.6-5.9 2.6-6.5 6.5-.6-3.9-2.6-5.9-6.5-6.5C7.4 9 9.4 7 10 3z"/><path class="a-star s2" d="M18 14c.3 2 1.3 3 3 3.2-1.7.3-2.7 1.3-3 3.3-.3-2-1.3-3-3-3.3 1.7-.2 2.7-1.2 3-3.2z"/></svg></div>
+        <h3>Wewnętrzny asystent AI</h3>
+        <p>Pracownik pyta o procedurę, cennik albo instrukcję i dostaje odpowiedź z Waszej bazy wiedzy, ze źródłem.</p>
+        <div class="tags"><span>regulaminy</span><span>instrukcje</span><span>baza wiedzy</span></div>
+        <div class="price"><span>cena</span><b>od 4 000&nbsp;zł netto</b></div>
+      </article>
+      <article class="svc">
+        <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18"/><circle cx="6" cy="6" r=".6" class="fill"/><circle cx="8" cy="6" r=".6" class="fill"/><path class="a-br l" d="M9 12l-2 2 2 2"/><path class="a-br r" d="M15 12l2 2-2 2"/><path class="a-cur" d="M12 12v4"/></svg></div>
+        <h3>Strony i aplikacje webowe</h3>
+        <p>Strony firmowe, panele klienta i systemy wewnętrzne na Laravel lub Symfony. Kod i hosting należą do Ciebie.</p>
+        <div class="tags"><span>Laravel</span><span>Symfony</span><span>panele</span><span>integracje</span></div>
+        <div class="price"><span>cena</span><b>od 5 000&nbsp;zł netto</b></div>
+      </article>
+    </div>
+
+    <div class="price-note">
+      <i class="ph ph-piggy-bank"></i>
+      <p><b>Dlaczego ceny są niższe?</b> Pracuję sam, bez zespołu, biura i działu sprzedaży. Nie doliczam kosztów, które nie tworzą nic dla Twojej firmy. Dokładną cenę dostajesz na piśmie przed startem.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TAGLINE REVEAL ===== -->
+<section class="tagline" aria-label="Hasło">
+  <div class="wrap">
+    <p id="tagline" data-accent="automatom,">Ty prowadzisz firmę. Powtarzalną robotę oddaj automatom, które nie biorą urlopu i odpisują klientom o trzeciej w nocy.</p>
+  </div>
+</section>
+
+<!-- ===== RULES ===== -->
+<section class="block reveal" aria-labelledby="rules-h" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">~/zasady</p>
+    <h2 class="h2" id="rules-h">Proste zasady współpracy.</h2>
+    <div class="rules">
+      <div class="rule"><span class="n">01</span><div><h3>15 minut rozmowy za darmo</h3><p>Opowiadasz o problemie, ja mówię, czy i jak mogę pomóc. Bez zobowiązań.</p></div></div>
+      <div class="rule"><span class="n">02</span><div><h3>Analiza zostaje u Ciebie</h3><p>Nawet jeśli nie będziemy dalej współpracować, opis procesów i rekomendacje są Twoje.</p></div></div>
+      <div class="rule"><span class="n">03</span><div><h3>Płacisz po zakończeniu pracy</h3><p>Realizacja trwa dni, nie miesiące, więc nie dzielę jej na raty. Najpierw działa, potem faktura.</p></div></div>
+      <div class="rule"><span class="n">04</span><div><h3>Faktura VAT, umowa B2B</h3><p>Normalna współpraca firma z firmą, z fakturą i jasnym zakresem prac.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section class="block reveal" id="realizacje" aria-labelledby="proj-h" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">~/realizacje</p>
+    <h2 class="h2" id="proj-h">Systemy, które zaprojektowałem i zbudowałem.</h2>
+    <div class="projects">
+      <article class="proj">
+        <p class="meta">13 lat · architekt backendu</p>
+        <h3>Englishdom</h3>
+        <p>Szkoła angielskiego online działająca od 2010 roku: lekcje 1:1, grupy, kluby konwersacyjne i aplikacje mobilne. Cały backend i architektura.</p>
+        <p class="tags">php · architektura · skala</p>
+        <a class="link" href="https://englishdom.com" target="_blank" rel="noopener">englishdom.com <i class="ph ph-arrow-up-right"></i></a>
+      </article>
+      <article class="proj">
+        <p class="meta">od zera · cały backend</p>
+        <h3>All Right Pro</h3>
+        <p>Szkoła angielskiego dla Polaków: lekcje indywidualne, kursy online i kluby konwersacyjne. Cała architektura na Symfony.</p>
+        <p class="tags">symfony · platforma · płatności</p>
+        <a class="link" href="https://allrightpro.com/pl" target="_blank" rel="noopener">allrightpro.com <i class="ph ph-arrow-up-right"></i></a>
+      </article>
+      <article class="proj">
+        <p class="meta">o mnie · asystent AI</p>
+        <h3>vadymleontiev.dev</h3>
+        <p>Moje doświadczenie, umiejętności i stos technologiczny. Działa tam ten sam asystent AI, z którym możesz porozmawiać niżej.</p>
+        <p class="tags">claude api · rag · mcp</p>
+        <a class="link" href="https://vadymleontiev.dev" target="_blank" rel="noopener">vadymleontiev.dev <i class="ph ph-arrow-up-right"></i></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RECOMMENDATIONS ===== -->
+<section class="block reveal" id="rekomendacje" aria-labelledby="rec-h" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">~/rekomendacje</p>
+    <h2 class="h2" id="rec-h">Co mówią ludzie, z którymi pracowałem.</h2>
+    <div class="recs">
+      <figure class="rec">
+        <i class="ph-fill ph-quotes q" aria-hidden="true"></i>
+        <blockquote>Szybko ogarnia nawet duże, złożone systemy i błyskawicznie znajduje źródło problemu, nawet głęboko ukryte. Jego rozwiązania są przemyślane, stabilne i łatwo je rozwijać.</blockquote>
+        <figcaption><b>Roman Yas</b><span>Front End Engineer</span><span class="mono">jeden zespół, 12+ lat · paź 2026</span></figcaption>
+      </figure>
+      <figure class="rec">
+        <i class="ph-fill ph-quotes q" aria-hidden="true"></i>
+        <blockquote>Podchodzi do pracy poważnie, dba o jakość i zawsze można na nim polegać. Współpraca z nim jest prosta i przyjemna.</blockquote>
+        <figcaption><b>Tetiana Shevchenko</b><span>QA Lead</span><span class="mono">jeden zespół, 8 lat · paź 2026</span></figcaption>
+      </figure>
+      <figure class="rec">
+        <i class="ph-fill ph-quotes q" aria-hidden="true"></i>
+        <blockquote>Szybko realizuje zadania, rzeczowo prowadzi dyskusje i trafnie podpowiada rozwiązania. Chętnie bierze też rutynową pracę, której nikt inny nie chce robić.</blockquote>
+        <figcaption><b>Yevhen Loshkarov</b><span>IT Team Lead</span><span class="mono">bezpośredni przełożony, 9 lat · wrz 2026</span></figcaption>
+      </figure>
+    </div>
+    <p class="rec-foot">Cytaty przetłumaczone z angielskiego. <a href="https://www.linkedin.com/in/vadim-leontiev-a7035938/details/recommendations/" target="_blank" rel="noopener">Wszystkie rekomendacje na LinkedIn <i class="ph ph-arrow-up-right"></i></a></p>
+  </div>
+</section>
+
+<!-- ===== CHAT ===== -->
+<section class="block reveal" id="czat" aria-labelledby="chat-h" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker">~/czat</p>
+    <h2 class="h2" id="chat-h">Zamiast FAQ: zapytaj mojego asystenta AI.</h2>
+    <p class="lead">To przykład tego, co mogę zbudować dla Twojej firmy. Odpowiada o usługach, terminach i technologii. Jeśli nie wie, powie, żeby napisać do mnie.</p>
+    <div class="shell chat">
+      <div class="shell-in chat-win">
+        <div class="chat-log" id="chatLog" aria-live="polite">
+          <div class="msg bot">Cześć! Jestem asystentem Vadyma. Zapytaj mnie o chatboty, automatyzacje, terminy albo to, jak wygląda współpraca.</div>
+        </div>
+        <div class="suggest" id="suggest">
+          <button type="button">Ile trwa wdrożenie chatbota na WhatsAppie?</button>
+          <button type="button">Co można zautomatyzować w biurze rachunkowym?</button>
+          <button type="button">Jak wygląda pierwsza rozmowa?</button>
+        </div>
+        <form class="chat-form" id="chatForm" novalidate>
+          <label for="chatInput" class="skip" style="position:absolute;left:-9999px">Twoje pytanie</label>
+          <input id="chatInput" type="text" placeholder="Napisz pytanie…" autocomplete="off" maxlength="600">
+          <button class="btn btn-dark" type="submit" id="chatSend"><i class="ph ph-paper-plane-tilt"></i>Wyślij</button>
+        </form>
+        <p class="chat-hint" id="chatHint">Nie wpisuj danych osobowych. Rozmowa nie jest zapisywana na stałe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA + FORM ===== -->
+<section class="final reveal" id="kontakt" aria-labelledby="final-h">
+  <div class="wrap">
+    <h2 class="h2" id="final-h">Masz proces, który zjada czas Twojego zespołu?</h2>
+    <p class="lead">Opowiedz o swoim problemie. Odpowiem w ciągu kilku godzin z orientacyjnym planem i ceną realizacji.</p>
+
+    <div class="shell form-shell">
+      <!-- TODO: w Laravel dodaj @csrf i ustaw action na swoją trasę -->
+      <form class="shell-in lead-form" id="leadForm" action="/kontakt" method="post" novalidate>
+        <div class="fields" id="formFields">
+          <div class="field">
+            <label for="f-name">Imię i nazwisko</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Anna Kowalczyk" maxlength="120">
+          </div>
+          <div class="field">
+            <label for="f-email">E-mail <span class="req">wymagany</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="anna@firma.pl" required maxlength="160" aria-describedby="e-email">
+            <p class="ferr" id="e-email" hidden></p>
+          </div>
+          <div class="field full">
+            <label for="f-msg">Opisz swój problem</label>
+            <textarea id="f-msg" name="message" rows="5" maxlength="3000" placeholder="Np. Co tydzień ręcznie przepisujemy zamówienia z maili do Excela i CRM. Zajmuje to dwóm osobom około 6 godzin."></textarea>
+            <p class="fhint"><span id="msgCount">0</span> / 3000</p>
+          </div>
+          <!-- honeypot przeciw botom -->
+          <input type="text" name="company_website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+          <div class="form-foot full">
+            <p class="consent">Wysyłając formularz, zgadzasz się na kontakt w sprawie zapytania. Szczegóły w <a href="/polityka-prywatnosci">polityce prywatności</a>.</p>
+            <button class="btn btn-dark btn-lg" type="submit" id="formSend"><i class="ph ph-paper-plane-tilt"></i>Wyślij zapytanie</button>
+          </div>
+          <p class="ferr full" id="e-form" hidden></p>
+        </div>
+        <div class="sent" id="formSent" hidden tabindex="-1">
+          <div class="sent-ic"><i class="ph ph-check"></i></div>
+          <h3>Zapytanie wysłane</h3>
+          <p>Odpowiem na <b id="sentMail"></b> w ciągu kilku godzin, z orientacyjnym planem i ceną.</p>
+        </div>
+      </form>
+    </div>
+
+    <p class="alt">Wolisz porozmawiać?</p>
+    <!-- TODO: podmień na link Cal.com / Google Calendar -->
+    <div class="cta-row" style="margin-top:var(--s3)">
+      <a class="btn btn-lg" href="mailto:hello@vadymleontiev.dev?subject=Rozmowa%2015%20minut"><i class="ph ph-calendar-blank"></i>Umów 15 minut rozmowy</a>
+    </div>
+    <button class="copy" id="copyMail" type="button" aria-label="Skopiuj adres hello@vadymleontiev.dev">
+      hello@vadymleontiev.dev <i class="ph ph-copy"></i><small id="copyState">kliknij, aby skopiować</small>
+    </button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Vadym Leontiev · faktura VAT B2B</span>
+    <nav aria-label="Stopka">
+      <a href="https://vadymleontiev.dev" target="_blank" rel="noopener">O mnie</a>
+      <a href="/polityka-prywatnosci">Polityka prywatności</a>
+      <a href="mailto:hello@vadymleontiev.dev">hello@vadymleontiev.dev</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) document.querySelectorAll('.svc .ic svg').forEach(svg => svg.pauseAnimations && svg.pauseAnimations());
+
+  /* Mobile menu */
+  const burger = document.querySelector('.burger'), panel = document.getElementById('panel');
+  const links = [...panel.querySelectorAll('a')];
+  const setMenu = open => {
+    burger.setAttribute('aria-expanded', open); panel.classList.toggle('open', open);
+    panel.setAttribute('aria-hidden', !open); document.body.style.overflow = open ? 'hidden' : '';
+    links.forEach((a, i) => a.style.transitionDelay = open ? Math.min(i * 60, 400) + 'ms' : '0ms');
+  };
+  burger.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
+  links.forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+  /* Scroll reveal, once */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* Current nav item */
+  const navLinks = [...document.querySelectorAll('.nav ul a')];
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) navLinks.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  ['uslugi','jak','realizacje','rekomendacje','czat'].forEach(id => spy.observe(document.getElementById(id)));
+
+  /* Tagline: words light up one by one */
+  const tg = document.getElementById('tagline');
+  const accent = new Set((tg.dataset.accent || '').split('|'));
+  tg.innerHTML = tg.textContent.trim().split(/\s+/).map(w =>
+    `<span class="w${accent.has(w) ? ' acc' : ''}">${w}</span>`).join(' ');
+  const words = tg.querySelectorAll('.w');
+  if (reduce) words.forEach(w => w.classList.add('on'));
+  else {
+    const wio = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('on'); wio.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -40% 0px' });
+    words.forEach(w => wio.observe(w));
+  }
+
+  /* Copy e-mail */
+  const copyBtn = document.getElementById('copyMail'), copyState = document.getElementById('copyState');
+  copyBtn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('hello@vadymleontiev.dev'); copyState.textContent = 'skopiowano'; }
+    catch { copyState.textContent = 'nie udało się skopiować, zaznacz adres ręcznie'; }
+    setTimeout(() => copyState.textContent = 'kliknij, aby skopiować', 2400);
+  });
+
+  /* ===== Lead form =====
+     TODO: ustaw adres. Backend powinien zwrócić 2xx (np. JSON {ok:true}). */
+  const FORM_ENDPOINT = document.getElementById('leadForm').action;
+  const lf = document.getElementById('leadForm'), fEmail = document.getElementById('f-email'),
+        eEmail = document.getElementById('e-email'), eForm = document.getElementById('e-form'),
+        fMsg = document.getElementById('f-msg'), msgCount = document.getElementById('msgCount'),
+        fSend = document.getElementById('formSend');
+  const sendLabel = fSend.innerHTML;
+  fMsg.addEventListener('input', () => msgCount.textContent = fMsg.value.length);
+  const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const showEmailErr = msg => { eEmail.textContent = msg; eEmail.hidden = !msg; fEmail.setAttribute('aria-invalid', !!msg); };
+  fEmail.addEventListener('blur', () => { const v = fEmail.value.trim(); if (v) showEmailErr(emailOk(v) ? '' : 'Sprawdź adres e-mail, np. anna@firma.pl.'); });
+  fEmail.addEventListener('input', () => { if (fEmail.getAttribute('aria-invalid') === 'true' && emailOk(fEmail.value.trim())) showEmailErr(''); });
+  lf.addEventListener('submit', async e => {
+    e.preventDefault(); eForm.hidden = true;
+    const email = fEmail.value.trim();
+    if (!email) { showEmailErr('Podaj adres e-mail, żebym mógł odpowiedzieć.'); fEmail.focus(); return; }
+    if (!emailOk(email)) { showEmailErr('Sprawdź adres e-mail, np. anna@firma.pl.'); fEmail.focus(); return; }
+    showEmailErr('');
+    fSend.disabled = true; fSend.innerHTML = '<span class="spin"></span>Wysyłam';
+    try {
+      const fd = new FormData(lf);
+      if (fd.get('company_website')) throw new Error('spam');
+      const csrf = document.querySelector('meta[name="csrf-token"]')?.content;
+      const r = await fetch(FORM_ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json', ...(csrf ? { 'X-CSRF-TOKEN': csrf } : {}) } });
+      if (!r.ok) throw new Error(r.status);
+      document.getElementById('sentMail').textContent = email;
+      document.getElementById('formFields').hidden = true;
+      const sent = document.getElementById('formSent'); sent.hidden = false; sent.focus();
+    } catch {
+      eForm.textContent = 'Nie udało się wysłać formularza. Spróbuj ponownie albo napisz na hello@vadymleontiev.dev.';
+      eForm.hidden = false;
+    } finally { fSend.disabled = false; fSend.innerHTML = sendLabel; }
+  });
+
+  /* ===== AI chat → POST /chat (stateless, przyjmuje tablicę messages) =====
+     TODO: ustaw właściwy adres backendu (ten sam co na vadymleontiev.dev). */
+  const CHAT_ENDPOINT = '/chat';
+  const log = document.getElementById('chatLog'), form = document.getElementById('chatForm'),
+        input = document.getElementById('chatInput'), send = document.getElementById('chatSend'),
+        hint = document.getElementById('chatHint'), suggest = document.getElementById('suggest');
+  const defaultHint = hint.textContent;
+  const history = [];
+  const add = (cls, text) => { const d = document.createElement('div'); d.className = 'msg ' + cls; d.textContent = text; log.appendChild(d); log.scrollTop = log.scrollHeight; return d; };
+
+  async function ask(text) {
+    text = text.trim();
+    if (!text) { hint.textContent = 'Wpisz pytanie, zanim wyślesz wiadomość.'; hint.classList.add('e'); input.focus(); return; }
+    hint.textContent = defaultHint; hint.classList.remove('e'); suggest.hidden = true;
+    add('me', text); history.push({ role: 'user', content: text });
+    input.value = ''; send.disabled = true; input.disabled = true;
+    const sk = document.createElement('div'); sk.className = 'skel'; sk.innerHTML = '<i></i><i></i>'; log.appendChild(sk); log.scrollTop = log.scrollHeight;
+    try {
+      const r = await fetch(CHAT_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history }) });
+      if (!r.ok) throw new Error(r.status);
+      const data = await r.json();
+      const reply = data.reply ?? data.content ?? data.message ?? data.answer ?? '';
+      sk.remove();
+      if (!reply) throw new Error('empty');
+      add('bot', reply); history.push({ role: 'assistant', content: reply });
+    } catch (e) {
+      sk.remove(); history.pop();
+      add('err', 'Asystent nie odpowiedział. Spróbuj ponownie za chwilę albo napisz na hello@vadymleontiev.dev.');
+    } finally { send.disabled = false; input.disabled = false; input.focus(); }
+  }
+  form.addEventListener('submit', e => { e.preventDefault(); ask(input.value); });
+  suggest.addEventListener('click', e => { if (e.target.tagName === 'BUTTON') ask(e.target.textContent); });
+})();
+</script>
+</body>
+</html>

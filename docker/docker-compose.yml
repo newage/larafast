@@ -10,6 +10,7 @@ services:
         APP_ENV: ${APP_ENV:-local}
     environment:
       XDEBUG_MODE: ${XDEBUG_MODE:-debug}
+      DB_HOST: mysql
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
@@ -25,6 +26,8 @@ services:
         HOST_GID: ${HOST_GID}
         APP_ENV: ${APP_ENV:-local}
     command: supercronic /var/www/larafast/docker/crond/${APP_ENV:-local}
+    environment:
+      DB_HOST: mysql
     volumes:
       - ..:/var/www/larafast
     depends_on:

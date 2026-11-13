@@ -15,4 +15,16 @@ return [
 
     'contact_email' => env('SITE_CONTACT_EMAIL', 'kontakt@example.com'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Calendar Booking
+    |--------------------------------------------------------------------------
+    |
+    | Public Google Calendar appointment page behind every "Umów 15 minut"
+    | call to action on the landing page.
+    |
+    */
+
+    'calendar_url' => env('SITE_CALENDAR_URL', 'https://calendar.app.google/xVjCjasQxYJgKxyN9'),
+
 ];

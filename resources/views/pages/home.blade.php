@@ -1,21 +1,23 @@
 @extends('layouts.app')
 
+@section('title', 'Vadym Leontiev · Automatyzacje AI, chatboty i aplikacje dla firm')
+@section('description', 'Chatboty AI 24/7, automatyzacja procesów między działami i aplikacje na Laravel i Symfony. Jeden programista z 20 latami doświadczenia: MVP w 2–3 dni, płatność po zakończeniu pracy, faktura VAT.')
+
 @section('content')
-    <div class="relative w-full overflow-x-clip bg-canvas font-sans text-base text-ink">
-        <x-backdrop />
-
-        <a href="#main" class="absolute -top-20 left-4 z-10 rounded-lg bg-ink px-3 py-2 text-sm font-semibold text-canvas focus:top-4">Przejdź do treści</a>
-
-        <div class="prog" aria-hidden="true"></div>
+    <div class="lp">
+        <a href="#main" class="skip">Przejdź do treści</a>
 
         <x-nav />
 
-        <main id="main" class="relative z-[1]">
+        <main id="main">
             <x-hero />
-            <x-intro />
-            <x-services />
-            <x-projects />
             <x-process />
+            <x-vs />
+            <x-services />
+            <x-tagline />
+            <x-rules />
+            <x-projects />
+            <x-recommendations />
             <x-ai-chat />
             <x-cta />
         </main>

@@ -1,37 +1,15 @@
-@php
-    $steps = [
-        ['Ustalam z klientem, czego potrzebuje', 'Rozmowa'],
-        ['Przygotowuję projekt graficzny i logo, klient je zatwierdza', 'Akceptacja'],
-        ['Tworzę stronę na podstawie zatwierdzonego projektu', 'Kod'],
-        ['Publikuję stronę na hostingu', 'Online'],
-    ];
-@endphp
-
-<section class="mx-auto flex max-w-[1120px] flex-col items-center px-6 py-16 text-center sm:py-24">
-    <div class="in inline-flex items-center rounded-lg border border-line bg-canvas px-3 py-1 font-mono text-sm text-muted">Strony www i automatyzacja AI</div>
-
-    <h1 class="in mt-6 max-w-[680px] bg-linear-to-r from-ink to-muted bg-clip-text text-4xl font-semibold tracking-[-0.025em] text-transparent sm:text-5xl sm:leading-none" style="animation-delay:80ms">Strony, które sprzedają.<br>Automatyzacje, które pracują.</h1>
-
-    <p class="in mt-6 max-w-[680px] text-lg text-muted" style="animation-delay:160ms">Tworzę szybkie strony firmowe w Laravel oraz procesy z AI, które zdejmują z zespołu powtarzalną pracę. Jeden programista, jeden kontakt, ustalony zakres przed startem.</p>
-
-    <div class="in mt-8 flex flex-col items-center gap-4" style="animation-delay:240ms">
-        <x-cta-button>Czat z asystentem</x-cta-button>
-        <p class="text-sm text-muted">20 lat doświadczenia w backendzie stoi za każdym projektem</p>
-    </div>
-
-    <div class="in mt-16 w-full max-w-[720px] rounded-3xl border border-line bg-surface p-3 text-left" style="animation-delay:320ms">
-        <div class="wf flex flex-col gap-4 rounded-xl bg-surface-raised p-6">
-            <div class="wfbar" aria-hidden="true"></div>
-            <div class="flex items-center justify-between font-mono text-sm text-muted">
-                <span class="inline-flex items-center gap-2"><span class="live" aria-hidden="true"></span>Jak pracuję</span>
-            </div>
-            @foreach ($steps as $i => [$label, $status])
-                <div class="flex flex-wrap items-center gap-3 py-3">
-                    <span class="font-mono text-sm text-muted">{{ sprintf('%02d', $i + 1) }}</span>
-                    <span class="flex-[1_1_200px]">{{ $label }}</span>
-                    <span class="font-mono text-xs {{ $loop->last ? 'text-ink' : 'text-muted' }}">{{ $status }}</span>
-                </div>
-            @endforeach
+<section class="hero">
+    <div class="wrap">
+        <div class="avatar">
+            <img src="{{ asset('images/photo.jpg') }}" alt="Vadym Leontiev" width="88" height="88">
         </div>
+        <span class="eyebrow"><span class="dot"></span>Przyjmuję nowe projekty · Warszawa</span>
+        <h1>Chatboty i automatyzacje AI,<br>które pracują za Twój zespół.</h1>
+        <p class="sub">Jestem jednym programistą, nie software housem. Rozmawiasz bezpośrednio ze mną, bez głuchego telefonu i bez narzutów na biuro. Dlatego taniej i szybciej: działające MVP w 2–3 dni.</p>
+        <div class="cta-row">
+            <a class="btn btn-dark btn-lg" href="{{ config('site.calendar_url') }}" target="_blank" rel="noopener"><x-glyph name="calendar" />Umów 15 minut rozmowy</a>
+            <a class="btn btn-lg" href="#czat"><x-glyph name="chat" />Zapytaj asystenta AI</a>
+        </div>
+        <p class="proof">20+ lat w backendzie · 13 lat architekt Englishdom · faktura VAT B2B</p>
     </div>
 </section>

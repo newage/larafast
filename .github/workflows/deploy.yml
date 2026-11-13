@@ -103,7 +103,6 @@ jobs:
              cd '${REMOTE_PATH}'
              rm -rf .deploy-new && mkdir .deploy-new
              tar -xzf - -C .deploy-new
-             # аналог rsync --delete: прибрати старе, крім збережених шляхів
              find . -mindepth 1 -maxdepth 1 \
                ! -name .deploy-new ! -name .env ! -name storage \
                ! -name public ! -name bootstrap -exec rm -rf {} +

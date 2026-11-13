@@ -1,53 +1,33 @@
 @php
+    $days = range(1, 6);
     $steps = [
-        [
-            'title' => 'Rozmowa wstępna',
-            'text' => 'Trzydzieści minut. Opisujesz zadanie, które pochłania najwięcej czasu. Zadaję pytania i uczciwie mówię, czy oprogramowanie jest tu właściwym rozwiązaniem.',
-            'svg' => '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>',
-        ],
-        [
-            'title' => 'Pisemna oferta',
-            'text' => 'Przed rozpoczęciem pracy dostajesz zakres, cenę i harmonogram prostym językiem, bez niespodzianek.',
-            'svg' => '<path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4M10 12h6M10 16h6"/>',
-        ],
-        [
-            'title' => 'Realizacja i przekazanie',
-            'text' => 'Pracuję etapami i pokazuję efekt po każdym z nich. Na końcu otrzymujesz kod, dokumentację i omówienie rozwiązania.',
-            'svg' => '<path d="M9 8l-5 4 5 4M15 8l5 4-5 4"/>',
-        ],
+        ['Rozmowa i projekt', '15 min · potrzeby · projekt', '1/2', 'k', '0s', 'akceptujesz projekt', false],
+        ['Wersja MVP', 'do kliknięcia w przeglądarce', '2/4', '', '.15s', 'testujesz na żywo', false],
+        ['Funkcje i integracje', 'czat AI · CRM · automaty', '4/6', '', '.3s', 'chatbot, CRM, poczta', false],
+        ['Start', 'testy · hosting · przekazanie', '6/7', 'k', '.45s', 'działa u Ciebie', true],
     ];
-    $technologies = ['Laravel', 'Symfony', 'PHP', 'MySQL', 'Python', 'PostgreSQL', 'Redis', 'RabbitMQ', 'Kafka', 'FastAPI', 'LangChain', 'Claude API', 'MCP', 'REST API'];
+    $chips = ['płatność po zakończeniu', 'kod i dostępy należą do Ciebie', 'krótka instrukcja dla zespołu'];
 @endphp
 
-<section id="process" class="mx-auto max-w-[1120px] scroll-mt-20 px-6 py-16 sm:py-24">
-    <div class="reveal">
-        <div class="font-mono text-sm text-muted">Proces</div>
-        <h2 class="mt-3 max-w-[680px] text-3xl font-semibold tracking-[-0.02em] sm:text-4xl">Trzy kroki od pomysłu do przekazania.</h2>
-    </div>
-
-    <div class="reveal mt-12 flex flex-wrap gap-4">
-        @foreach ($steps as $i => $step)
-            <div data-card="step" class="flex flex-[1_1_300px] flex-col gap-3 rounded-2xl border border-line p-6">
-                <div class="flex items-center justify-between">
-                    <span class="font-mono text-sm text-muted">{{ sprintf('%02d', $i + 1) }}</span>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{!! $step['svg'] !!}</svg>
-                </div>
-                <h3 class="text-xl font-semibold">{{ $step['title'] }}</h3>
-                <p class="text-muted">{{ $step['text'] }}</p>
+<section class="wrap reveal" id="jak" aria-labelledby="tl-h">
+    <div class="shell">
+        <div class="shell-in">
+            <div class="shell-head">
+                <h2 id="tl-h" class="mono" style="font-size:14px;line-height:20px;font-weight:500;letter-spacing:0">Jak pracuję · dzień 1 → 6</h2>
+                <div class="legend"><span><b></b>praca</span><span><b class="k"></b>Twoja akceptacja</span></div>
             </div>
-        @endforeach
-    </div>
-
-    <div class="reveal mt-16 flex flex-col gap-4">
-        <div class="text-sm text-muted">Technologie, na których pracuję</div>
-        <div class="mq font-mono text-sm">
-            @foreach ([false, true] as $copy)
-                <div class="mqi" @if ($copy) aria-hidden="true" @endif>
-                    @foreach ($technologies as $technology)
-                        <span class="rounded-lg border border-line-strong px-3 py-2">{{ $technology }}</span>
-                    @endforeach
-                </div>
-            @endforeach
+            <div class="tl">
+                <div class="days"><span></span>@foreach ($days as $day)<span class="day">dzień {{ $day }}</span>@endforeach</div>
+                @foreach ($steps as [$title, $meta, $column, $kind, $delay, $note, $atEnd])
+                    <div class="lbl"><h3>{{ $title }}</h3><p>{{ $meta }}</p></div>
+                    <div class="track"><div class="bar {{ $kind }}" style="grid-column:{{ $column }};transition-delay:{{ $delay }}"><span class="bar-note {{ $atEnd ? 'end' : '' }}">{{ $note }}</span></div></div>
+                @endforeach
+            </div>
+            <div class="tl-foot">
+                @foreach ($chips as $chip)
+                    <span class="chip">{{ $chip }}</span>
+                @endforeach
+            </div>
         </div>
     </div>
 </section>

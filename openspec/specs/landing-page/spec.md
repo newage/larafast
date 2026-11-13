@@ -6,24 +6,6 @@
 
 ## Requirements
 
-### Requirement: Заклики до дії ведуть на чат
-Усі кнопки-заклики на головній SHALL вести на якір `#chat`. У навігації кнопка SHALL називатися «Czat z AI», у hero-блоці та секції контакту — «Czat z asystentem». Секція чату SHALL NOT мати власної кнопки-заклику. Жодна кнопка-заклик SHALL NOT вести на `mailto:`.
-
-#### Scenario: Кнопки в nav, hero і контакті
-- **WHEN** відвідувач відкриває головну
-- **THEN** є рівно три кнопки-заклики («Czat z AI», «Czat z asystentem» двічі), кожна з `href="#chat"`
-
-#### Scenario: Кнопки без mailto
-- **WHEN** головна відрендерена
-- **THEN** жодна кнопка-заклик не має `href="mailto:…"`
-
-### Requirement: Секція контакту відповідає чату
-Секція `#contact` SHALL пропонувати написати асистентові AI в чаті, а не умовляти про розмову чи дзвінок.
-
-#### Scenario: Текст секції контакту
-- **WHEN** відвідувач бачить секцію `#contact`
-- **THEN** заголовок — «Opisz, co spowalnia Twoją firmę.», а абзац згадує асистента AI в чаті
-
 ### Requirement: Футер із посиланням на політику
 Футер головної SHALL містити «© <поточний рік> Vadym Leontiev», адресу `hello@vadymleontiev.dev` як посилання `mailto:` і посилання «Polityka prywatności» на `/polityka-prywatnosci`. Пункту «Regulamin» SHALL NOT бути.
 
@@ -31,20 +13,31 @@
 - **WHEN** відвідувач прокручує головну до кінця
 - **THEN** бачить посилання «Polityka prywatności» з `href="/polityka-prywatnosci"`, посилання `href="mailto:hello@vadymleontiev.dev"` і не бачить «Regulamin»
 
-### Requirement: Hero-блок із процесом створення сайту
-Hero-блок «Przykładowy proces» SHALL мати шапку «Przykładowy proces» ліворуч і «Jak pracuję» праворуч та 4 нумеровані кроки в порядку: «Ustalam z klientem, czego potrzebuje» — «Rozmowa»; «Przygotowuję projekt graficzny i logo, klient je zatwierdza» — «Akceptacja»; «Tworzę stronę na podstawie zatwierdzonego projektu» — «Kod»; «Publikuję stronę na hostingu» — «Online».
+### Requirement: Дзвінок на 15 хвилин через Google Calendar
+Кнопка «Umów 15 minut rozmowy» SHALL вести (`<a href>`) на публічну сторінку запису Google Calendar `https://calendar.app.google/xVjCjasQxYJgKxyN9` і відкривати її в новій вкладці. Кнопка SHALL NOT вести на `mailto:`.
 
-#### Scenario: Кроки й позначки
-- **WHEN** відвідувач бачить hero-блок
-- **THEN** кроки 01–04 мають зазначені тексти й позначки, а «Zapytanie klienta», «Gotowe», «Czeka na Ciebie» відсутні
+#### Scenario: Кнопка запису
+- **WHEN** відвідувач натискає «Umów 15 minut rozmowy»
+- **THEN** відкривається сторінка запису Google Calendar у новій вкладці
 
-### Requirement: Анімації макета
-Головна SHALL відтворювати анімації макета: послідовне підсвічування кроків hero-блоку зі смугою прогресу, індикатор «live», смугу прогресу скролу, марквіз технологій та декоративні анімації (`dots`, `draw`, `grow`, `spark`). За `prefers-reduced-motion: reduce` анімації SHALL бути вимкнені.
+#### Scenario: Адресу змінено через env
+- **WHEN** у середовищі задано інший URL запису
+- **THEN** кнопка веде на нього без зміни коду
 
-#### Scenario: Підсвічування кроків
-- **WHEN** hero-блок видимий
-- **THEN** кроки по черзі підсвічуються циклом, а над блоком біжить смуга прогресу
+### Requirement: Копіювання email
+Натискання на «hello@vadymleontiev.dev · kliknij, aby skopiować» SHALL копіювати адресу в буфер обміну й на час показувати «skopiowano». Якщо Clipboard API недоступний, SHALL використовуватися запасний спосіб; якщо копіювання неможливе, SHALL показуватися підказка виділити адресу вручну.
 
-#### Scenario: Зменшений рух
-- **WHEN** користувач увімкнув `prefers-reduced-motion: reduce`
-- **THEN** анімації не відтворюються, а контент лишається видимим
+#### Scenario: Успішне копіювання
+- **WHEN** відвідувач натискає на адресу
+- **THEN** буфер містить `hello@vadymleontiev.dev`, а підпис змінюється на «skopiowano»
+
+#### Scenario: Небезпечний контекст
+- **WHEN** `navigator.clipboard` недоступний
+- **THEN** адреса копіюється запасним способом
+
+### Requirement: Секція контакту з формою
+Секція контакту SHALL мати заголовок «Masz proces, który zjada czas Twojego zespołu?», форму запиту (спека `contact-form`) з кнопкою «Wyślij» і посилання на політику приватності.
+
+#### Scenario: Вигляд секції
+- **WHEN** відвідувач відкриває секцію контакту
+- **THEN** бачить заголовок, форму з кнопкою «Wyślij», кнопку «Umów 15 minut rozmowy» і адресу для копіювання
