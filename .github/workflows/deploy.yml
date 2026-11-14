@@ -111,7 +111,9 @@ jobs:
              mkdir -p public bootstrap
              cp -a .deploy-new/. .
              rm -rf .deploy-new
-             mkdir -p bootstrap/cache storage/logs storage/framework/cache/data storage/framework/sessions storage/framework/views
+             mkdir -p bootstrap/cache
+             rm -f bootstrap/cache/*.php
+             mkdir -p storage/logs storage/framework/cache/data storage/framework/sessions storage/framework/views
              chmod -R ug+rwX bootstrap/cache storage"
 
       - name: Migrate and optimize
@@ -122,4 +124,4 @@ jobs:
           REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
           ssh -i ~/.ssh/id_deploy -p "${SSH_PORT}" "${SSH_USER}@${SSH_HOST}" \
-            "cd '${REMOTE_PATH}' && php artisan migrate --force && php artisan optimize"
+            "cd '${REMOTE_PATH}' && php artisan package:discover --ansi && php artisan migrate --force && php artisan optimize"
