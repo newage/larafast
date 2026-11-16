@@ -128,7 +128,7 @@ jobs:
           MAIL_PORT: ${{ vars.MAIL_PORT }}
           MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-          MAIL_FROM_ADDRESS: ${{ vars.MAIL_FROM_ADDRESS }}
+          MAIL_FROM_ADDRESS: ${{ secrets.MAIL_FROM_ADDRESS }}
           SITE_CONTACT_EMAIL: ${{ secrets.SITE_CONTACT_EMAIL }}
           SITE_CALENDAR_URL: ${{ secrets.SITE_CALENDAR_URL }}
           PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
