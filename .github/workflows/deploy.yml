@@ -126,10 +126,15 @@ jobs:
           MAIL_SCHEME: ${{ vars.MAIL_SCHEME }}
           MAIL_HOST: ${{ vars.MAIL_HOST }}
           MAIL_PORT: ${{ vars.MAIL_PORT }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          SITE_CALENDAR_URL: ${{ secrets.SITE_CALENDAR_URL }}
+          PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
+          PINECONE_INDEX_HOST: ${{ secrets.PINECONE_INDEX_HOST }}
         run: |
           # Only non-empty values are sent, so an unset variable never blanks a key on the server.
           # Values are single-quoted so phpdotenv treats them literally (no ${VAR} expansion).
-          for key in MAIL_MAILER MAIL_SCHEME MAIL_HOST MAIL_PORT; do
+          for key in MAIL_MAILER MAIL_SCHEME MAIL_HOST MAIL_PORT MAIL_USERNAME MAIL_PASSWORD SITE_CALENDAR_URL PINECONE_API_KEY PINECONE_INDEX_HOST; do
             value="${!key}"
             [ -n "$value" ] || continue
             value="${value//\\/\\\\}"
