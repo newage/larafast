@@ -116,6 +116,40 @@ jobs:
              mkdir -p storage/logs storage/framework/cache/data storage/framework/sessions storage/framework/views
              chmod -R ug+rwX bootstrap/cache storage"
 
+      - name: Update mail settings in remote .env
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+          MAIL_MAILER: ${{ vars.MAIL_MAILER }}
+          MAIL_SCHEME: ${{ vars.MAIL_SCHEME }}
+          MAIL_HOST: ${{ vars.MAIL_HOST }}
+          MAIL_PORT: ${{ vars.MAIL_PORT }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        run: |
+          # Only non-empty values are sent, so an unset variable never blanks a key on the server.
+          # Values are single-quoted so phpdotenv treats them literally (no ${VAR} expansion).
+          for key in MAIL_MAILER MAIL_SCHEME MAIL_HOST MAIL_PORT MAIL_FROM_ADDRESS SITE_CONTACT_EMAIL MAIL_USERNAME MAIL_PASSWORD; do
+            value="${!key}"
+            [ -n "$value" ] || continue
+            value="${value//\\/\\\\}"
+            value="${value//\'/\\\'}"
+            printf "%s='%s'\n" "$key" "$value"
+          done \
+          | ssh -i ~/.ssh/id_deploy -p "${SSH_PORT}" "${SSH_USER}@${SSH_HOST}" \
+            "set -e
+             cd '${REMOTE_PATH}'
+             [ -f .env ] || touch .env
+             new=\$(mktemp)
+             tmp=\$(mktemp)
+             cat > \"\$new\"
+             awk -F= 'NR==FNR{k[\$1]=1;next} !(\$1 in k)' \"\$new\" .env > \"\$tmp\"
+             cat \"\$new\" >> \"\$tmp\"
+             cat \"\$tmp\" > .env
+             rm -f \"\$new\" \"\$tmp\""
+
       - name: Migrate and optimize
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
