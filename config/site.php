@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'contact_email' => env('SITE_CONTACT_EMAIL', 'kontakt@example.com'),
+    'contact_email' => env('SITE_CONTACT_EMAIL', 'hello@vadymleontiev.dev'),
 
     /*
     |--------------------------------------------------------------------------
