@@ -244,9 +244,34 @@ const initContactForm = (form) => {
     });
 };
 
+const initCarousel = (root) => {
+    const track = root.querySelector('[data-carousel-track]');
+    const prev = root.querySelector('[data-carousel-prev]');
+    const next = root.querySelector('[data-carousel-next]');
+    const edge = 4;
+
+    const update = () => {
+        prev.disabled = track.scrollLeft <= edge;
+        next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - edge;
+    };
+    const step = (direction) => {
+        const card = track.firstElementChild;
+        const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+
+        track.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
+
+    prev.addEventListener('click', () => step(-1));
+    next.addEventListener('click', () => step(1));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+};
+
 initMenu();
 initReveal();
 initNavSpy();
 initTagline();
 initCopyEmail();
 document.querySelectorAll('[data-contact-form]').forEach(initContactForm);
+document.querySelectorAll('[data-carousel]').forEach(initCarousel);

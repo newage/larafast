@@ -51,9 +51,21 @@ class LandingPageTest extends TestCase
         $content = $this->get('/')->assertOk()->getContent();
 
         $this->assertSame(6, substr_count($content, 'class="svc'));
-        $this->assertSame(3, substr_count($content, 'class="proj"'));
+        $this->assertSame(4, substr_count($content, 'class="proj"'));
         $this->assertSame(3, substr_count($content, 'class="rec"'));
         $this->assertSame(4, substr_count($content, 'class="rule"'));
+    }
+
+    public function test_projects_carousel_lists_nordleaf_first_with_arrows(): void
+    {
+        $response = $this->get('/')->assertOk();
+        $response->assertSeeInOrder(['<h3>Nordleaf</h3>', '<h3>Englishdom</h3>'], false);
+
+        $content = $response->getContent();
+        $this->assertStringContainsString('w trakcie', $content);
+        $this->assertStringContainsString('href="https://nordleaf.vadymleontiev.dev/"', $content);
+        $this->assertStringContainsString('aria-label="Poprzednie"', $content);
+        $this->assertStringContainsString('aria-label="Następne"', $content);
     }
 
     public function test_navigation_links_to_section_anchors(): void

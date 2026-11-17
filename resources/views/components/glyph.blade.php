@@ -10,6 +10,8 @@
         @case('check')<path d="M5 12.5l4.5 4.5L19 7"/>@break
         @case('coins')<circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3H15"/>@break
         @case('arrow-up-right')<path d="M7 17L17 7M8 7h9v9"/>@break
+        @case('chevron-left')<path d="M15 5l-7 7 7 7"/>@break
+        @case('chevron-right')<path d="M9 5l7 7-7 7"/>@break
         @case('quotes')<path fill="currentColor" stroke="none" d="M10 8c-3 0-5 2-5 5v5h5v-5H7.5c0-1.5 1-3 2.5-3zM19 8c-3 0-5 2-5 5v5h5v-5h-2.5c0-1.5 1-3 2.5-3z"/>@break
         @case('send')<path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/>@break
         @case('copy')<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>@break
