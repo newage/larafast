@@ -24,7 +24,7 @@
                 <h3>Automatyzacja między działami</h3>
                 <p>Zgłoszenie trafia do CRM, tworzy zadanie, fakturę i raport. Nikt nie przepisuje danych z maila do Excela.</p>
                 <div class="tags"><span>CRM</span><span>formularze</span><span>poczta</span><span>arkusze</span><span>faktury</span></div>
-                <div class="price"><span>cena</span><b>od 5 000&nbsp;zł netto</b></div>
+                <div class="price"><span>cena</span><b>od 3 000&nbsp;zł netto</b></div>
             </article>
             <article class="svc">
                 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 3h8l4 4v14h-12z"/><path d="M11.5 3v4h4"/><path class="a-line l1" d="M6.5 11h6"/><path class="a-line l2" d="M6.5 14h6"/><path class="a-line l3" d="M6.5 17h4"/><g class="a-up"><path d="M20 13v8M17.5 15.5L20 13l2.5 2.5"/></g></svg></div>
@@ -38,14 +38,14 @@
                 <h3>Wewnętrzny asystent AI</h3>
                 <p>Pracownik pyta o procedurę, cennik albo instrukcję i dostaje odpowiedź z Waszej bazy wiedzy, ze źródłem.</p>
                 <div class="tags"><span>regulaminy</span><span>instrukcje</span><span>baza wiedzy</span></div>
-                <div class="price"><span>cena</span><b>od 4 000&nbsp;zł netto</b></div>
+                <div class="price"><span>cena</span><b>od 6 000&nbsp;zł netto</b></div>
             </article>
             <article class="svc">
                 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18"/><circle cx="6" cy="6" r=".6" class="fill"/><circle cx="8" cy="6" r=".6" class="fill"/><path class="a-br l" d="M9 12l-2 2 2 2"/><path class="a-br r" d="M15 12l2 2-2 2"/><path class="a-cur" d="M12 12v4"/></svg></div>
                 <h3>Strony i aplikacje webowe</h3>
                 <p>Strony firmowe, panele klienta i systemy wewnętrzne na Laravel lub Symfony. Kod i hosting należą do Ciebie.</p>
                 <div class="tags"><span>Laravel</span><span>Symfony</span><span>panele</span><span>integracje</span></div>
-                <div class="price"><span>cena</span><b>od 5 000&nbsp;zł netto</b></div>
+                <div class="price"><span>cena</span><b>od 4 000&nbsp;zł netto</b></div>
             </article>
         </div>
 

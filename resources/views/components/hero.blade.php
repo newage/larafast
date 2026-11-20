@@ -1,7 +1,7 @@
 <section class="hero">
     <div class="wrap">
         <div class="avatar">
-            <img src="{{ asset('images/photo.jpg') }}" alt="Vadym Leontiev" width="88" height="88">
+            <img src="{{ asset('images/photo.jpg') }}" alt="Vadym Leontiev" width="180" height="180">
         </div>
         <span class="eyebrow"><span class="dot"></span>Przyjmuję nowe projekty · Warszawa</span>
         <h1>Chatboty i automatyzacje AI,<br>które pracują za Twój zespół.</h1>
